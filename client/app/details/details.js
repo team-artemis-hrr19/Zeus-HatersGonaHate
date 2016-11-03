@@ -133,7 +133,7 @@
             });
           }
         });
-        if (!nowPlaying) {       //fix to work with Objects
+        if (!nowPlaying) {
           DetailsVm.hasNoShowtime = true;
         }
       } else {

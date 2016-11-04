@@ -100,7 +100,6 @@
   //function is called when the user submits a zip code to get local showtimes
   DetailsVm.getShowtimes = function(movieTitle) {
     Details.getShowtimes(DetailsVm.fullDate, DetailsVm.zip).then(function(allShowtimes) {
-      // DetailsVm.showtimes = allShowtimes;  
       var nowPlaying = [];
       if (allShowtimes) {
         allShowtimes.forEach(function(showtime) {
@@ -111,19 +110,19 @@
                 nowPlaying.push(
                   {
                     theatreName: showing.theatre.name,
-                    showings: [showing.dateTime.slice(11)],
+                    showings: [Details.normalizeTime(showing.dateTime.slice(11))],
                     ticketURI: showing.ticketURI
                   }
                 );
               } else {
                 for (var i = 0; i < length; i++) {
                   if (nowPlaying[i] && nowPlaying[i].theatreName === showing.theatre.name) {
-                    nowPlaying[i].showings.push(showing.dateTime.slice(11));
+                    nowPlaying[i].showings.push(Details.normalizeTime(showing.dateTime.slice(11)));
                   } else if (i === length - 1) {
                     nowPlaying.push(
                       {
                         theatreName: showing.theatre.name,
-                        showings: [showing.dateTime.slice(11)],
+                        showings: [Details.normalizeTime(showing.dateTime.slice(11))],
                         ticketURI: showing.ticketURI
                       }
                     );

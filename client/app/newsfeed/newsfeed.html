@@ -1,3 +1,23 @@
 <div class="container">
-	<h4 class="heading-medium">News Feed</h4>
+	<div class="recommended">
+		<h4 class="heading-medium">Recommended Users</h4>
+		<div class="recUser" ng-repeat="user in recUsers">
+			<img src="{{user.profilePicLink}}"></img>
+			<span>{{user.username}}</span>
+			<button ng-click="">Follow</button>
+			<button ng-click="closeUser(user.username)">X</button>
+		</div>
+	</div>
+
+	<div class="newsfeed">
+		<h4 class="heading-medium">News Feed</h4>
+		<div class="event" ng-repeat="event in events">
+			<span>{{event.emoji}}</span>
+			<div class="user-badge" ng-repeat="user in event.users">
+				<img src="{{user.profilePicLink}}"></img>
+				{{user.username}}
+			</div>
+			<button ng-click="closeEvent(event._id)">X</button>
+		</div>
+	</div>
 </div>

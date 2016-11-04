@@ -7,6 +7,7 @@ angular.module('zeus', [
   'zeus.account',
   'zeus.reviews',
   'zeus.editReview',
+  'zeus.newsfeed',
   'auth0.lock',
   'angular-jwt',
   'ui.router'
@@ -150,7 +151,10 @@ angular.module('zeus', [
     var newsFeedState = {
       name: 'newsfeed',
       url: '/newsfeed',
-      templateUrl: 'app/newsfeed/newsfeed.html'
+      templateUrl: 'app/newsfeed/newsfeed.html',
+      controller: 'newsFeedController',
+      controllerAs: 'NewsFeedVm',
+      authenticate: false
     };
 
     var fourOhFourState = {

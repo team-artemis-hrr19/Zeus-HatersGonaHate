@@ -1,10 +1,25 @@
 angular.module('zeus.newsfeed', [])
   .controller('newsFeedController', function ($scope, $http, EventConverter) {
-    $scope.users = [];
-    $scope.recUsers = []
-    $scope.events = [];
-    $scope.value = 'jon';
+    $scope.closeUser = function (username) {
+      const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
+      const index = $scope.recUsers.map(user => user.username)
+        .indexOf(username);
+      $scope.recUsers[index] = random;
+    };
 
+    $scope.closeEvent = function (id) {
+      console.log('close event', id);
+      const index = $scope.events
+        .map(event => event._id)
+        .indexOf(id);
+      console.log(index);
+      $scope.events = [
+        ...$scope.events.slice(0, index),
+        ...$scope.events.slice(index + 1)
+      ];
+    };
+
+    // streams
     const userStream = Rx.Observable.fromPromise(
       $http({
         method: 'GET',
@@ -19,27 +34,6 @@ angular.module('zeus.newsfeed', [])
       })
       .subscribe();
 
-    $scope.closeUser = function (username) {
-      console.log('X clicked', username);
-      const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
-      const index = $scope.recUsers.map(user => user.username)
-        .indexOf(username);
-      $scope.recUsers[index] = random;
-    };
-
-    // const suggestedUser1Stream = userStream
-    //   .map(users => {
-    //     console.log(users);
-    //     return 
-    //   });
-
-    // $scope.$createObservableFunction('click')
-    //   .map(() => $scope.recUsers)
-    //   .flatMapLatest(userStream)
-    //   .subscribe(results => {
-    //     $scope.recUsers = results.data;
-    //   });
-
     const eventStream = Rx.Observable.fromPromise(
       $http({
         method: 'GET',
@@ -49,7 +43,8 @@ angular.module('zeus.newsfeed', [])
 
     eventStream
       .safeApply($scope, function (events) {
-        $scope.events = events.data;
+        $scope.events = events.data
+          .map(event => Object.assign(event, { emoji: EventConverter.getEmoji(event.type) }));
       })
       .subscribe();
   });

@@ -1,9 +1,7 @@
 angular.module('zeus.newsfeed', [])
   .controller('newsFeedController', function ($scope, $http) {
     NewsFeedVm = this;
-    NewsFeedVm.value = 'yo';
-
-    NewsFeedVm.recUsers = ['jon'];
+    NewsFeedVm.recUsers = [];
 
     const requestStream = Rx.Observable.just('/users/');
     const responseStream = requestStream.flatMap(
@@ -14,6 +12,5 @@ angular.module('zeus.newsfeed', [])
         })
       )
     );
-
 
   });

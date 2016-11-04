@@ -10,7 +10,6 @@ var authCheck = jwt({
   audience: '0cUlkKsftRF5gApO4Y6ojv3Rk5PZX8eE'
 });
 
-eventController.addEvent({ type: 'sunning' })
 module.exports = function (app, express) {
 
   //Review Routes

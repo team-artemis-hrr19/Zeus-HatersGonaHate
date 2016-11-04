@@ -9,6 +9,16 @@ module.exports = {
     }
     const event = new Event(options);
     return event.save()
-      .exec(() => {});    
+      .then(() => {});    
+  },
+
+  getEvents: function(req, res) {
+    return Event.find()
+      .exec((err, data) => {
+        if(err) {
+          return console.error('Error getting events from database', err);
+        }
+        return res.status(200).send(data);
+      });
   }
 };

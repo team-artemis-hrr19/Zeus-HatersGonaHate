@@ -1,6 +1,7 @@
-var reviewController = require('../reviews/reviewController.js');
-var userController = require('../users/userController.js');
-var commentController = require('../comments/commentController.js');
+var reviewController = require('../reviews/reviewController');
+var userController = require('../users/userController');
+var eventController = require('../events/eventsController');
+var commentController = require('../comments/commentController');
 var jwt = require('express-jwt');
 
 //Checks the token for authentication when attatched to route
@@ -9,6 +10,7 @@ var authCheck = jwt({
   audience: '0cUlkKsftRF5gApO4Y6ojv3Rk5PZX8eE'
 });
 
+eventController.addEvent({ type: 'sunning' })
 module.exports = function (app, express) {
 
   //Review Routes
@@ -50,5 +52,8 @@ module.exports = function (app, express) {
   app.delete('/delete/:type', authCheck, userController.removeFromUserLists);
 
   app.post('/add/:type', authCheck, userController.addToUserLists);
+
+  // Events Routes
+  app.get('/event', eventController.getEvents);
 
 };

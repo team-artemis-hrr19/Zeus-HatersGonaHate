@@ -1,5 +1,14 @@
 <div class="container">
+	<div>
+		<h4 class="heading-medium">Recommended Users</h4>
+		<div class="recUser" ng-repeat="user in recUsers | limitTo: 3">
+			<img src="{{user.profilePicLink}}"></img>
+			<span>{{user.username}}</span>
+			<button>Follow</button>
+			<button>X</button>
+
+		</div>
+	</div>
 	<h4 class="heading-medium">News Feed</h4>
-	<p>{{NewsFeedVm.recUsers[0]}}</p>
-	<p>{{NewsFeedVm.value}}</p>
+	<button ng-click="click()">Load</button>
 </div>

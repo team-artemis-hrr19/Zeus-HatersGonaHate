@@ -1,16 +1,18 @@
-angular.module('zeus.newsfeed', [])
+angular.module('zeus.newsfeed', ['rx'])
   .controller('newsFeedController', function ($scope, $http) {
-    NewsFeedVm = this;
-    NewsFeedVm.recUsers = [];
+    $scope.recUsers = [];
+    $scope.value = 'jon';
 
-    const requestStream = Rx.Observable.just('/users/');
-    const responseStream = requestStream.flatMap(
-      requestUrl => Rx.Observable.fromPromise(
-        $http({
-          method: 'GET',
-          url: requestUrl
-        })
-      )
+    const userStream = Rx.Observable.fromPromise(
+      $http({
+        method: 'GET',
+        url: '/user'
+      })
     );
-
+    $scope.$createObservableFunction('click')
+      .map(() => $scope.recUsers)
+      .flatMapLatest(userStream)
+      .subscribe(results => {
+        $scope.recUsers = results.data.slice(3);
+      });
   });

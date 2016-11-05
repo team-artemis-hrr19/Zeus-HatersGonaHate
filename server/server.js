@@ -2,9 +2,11 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
-var fillUsers = require('./fillUsers');
 
-//fillUsers(); //used to create lots of fake users for testing
+var fillUsers = require('./fillUsers');
+var fillEvents = require('./fillEvents')
+//fillUsers() //used to create lots of fake users for testing
+//fillEvents();
 
 var app = express();
 

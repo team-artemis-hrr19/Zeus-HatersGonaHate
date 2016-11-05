@@ -7,7 +7,6 @@
       <img ng-show="!DetailsVm.poster_path" src="http://dummyimage.com/185x275/000/fff&text={{DetailsVm.original_name}}" alt="">
       <details-buttons ng-style="!isAuthenticated && {'visibility':'hidden'}"></details-buttons>
 
-      <!--  I need to refactor this with an ng-repeat -->
       <div class='ratingsContainer'>
        <div class='logoContainer' ng-style="{display:'inline-block'}">
          <img class="logo" src="http://www.camelot-films.co.uk/wp-content/uploads/2014/03/IMDb-Logo.23962421_std.jpg">
@@ -36,7 +35,6 @@
 
       <details-buttons ng-if="isAuthenticated"></details-buttons>
 
-    <!--  I need to refactor this with an ng-repeat -->
       <div class='ratingsContainer'>
        <div class='logoContainer' ng-style="{display:'inline-block'}">
          <img class="logo" src="http://www.camelot-films.co.uk/wp-content/uploads/2014/03/IMDb-Logo.23962421_std.jpg">

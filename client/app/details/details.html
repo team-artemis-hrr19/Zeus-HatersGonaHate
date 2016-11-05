@@ -23,6 +23,7 @@
   <div class="detail-nav">
     <a href="" ng-style="DetailsVm.currentView==='reviews' && {'border-bottom': '#6ABED8 solid 3px'}" ng-click="DetailsVm.currentView = 'reviews'">Reviews</a>
     <a href="" ng-style="DetailsVm.currentView==='showtimes' && {'border-bottom': '#6ABED8 solid 3px'}" ng-click="DetailsVm.currentView = 'showtimes'" ng-if="DetailsVm.type === 'movie'">Showtimes</a>
+    <a href="" ng-style="DetailsVm.currentView==='trailers' && {'border-bottom': '#6ABED8 solid 3px'}" ng-click="DetailsVm.currentView = 'trailers'">Trailers</a>
   </div>
   <!--Only displayed for movies, TV shows don't play in theatres!! -->
   <showtimes ng-show="DetailsVm.currentView === 'showtimes'" ng-if="DetailsVm.type === 'movie'"></showtimes>
@@ -34,6 +35,9 @@
      <p class="no-post">Currently no reviews...want to add one?</p>
    </div>
    <review-details ng-show="DetailsVm.currentView === 'reviews'"></review-details>
+ </div>
+ <div class='trailers'>
+   <trailers ng-show="DetailsVm.currentView === 'trailers'"></trailers>
  </div>
 
 </div>

@@ -15,6 +15,10 @@ angular.module('zeus', [
   ])
   .controller('zeusController', function ($location, authService, $http, $anchorScroll, User) {
     var ZeusVm = this;
+    ZeusVm.checked = false;
+    ZeusVm.toggle = () => {
+      ZeusVm.checked = !ZeusVm.checked
+    };
     ZeusVm.searchQuery = '';
     ZeusVm.search = function (search) {
       if (search.length < 1) {

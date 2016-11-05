@@ -8,6 +8,11 @@ angular.module('zeus.landing', ['pageslide-directive'])
     LandingVm.upcomingmovies = {};
     LandingVm.popularshows = {};
     LandingVm.latestshows = {};
+    LandingVm.checked = true;
+
+    LandingVm.toggle = () => {
+      LandingVm.checked = !LandingVm.checked;
+    };
 
     LandingVm.fetchPopularMovies = function () {
       Landing.getPopularMovies()

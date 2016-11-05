@@ -1,5 +1,5 @@
  angular.module('zeus.details', [])
-.controller('DetailsController', function($location, Details, Reviews, $stateParams, authService) {
+.controller('DetailsController', function($sce, $location, Details, Reviews, $stateParams, authService) {
   // capture the value of `this` in a variable vm
   // vm stands for view model and is a replacement for $scope
   var DetailsVm = this;
@@ -29,6 +29,7 @@
       $location.path(404);
     }
     DetailsVm.data = data; // save all movie details for the requested movie
+    DetailsVm.concatUrl();
 
     //convenience properties for shorthand in html views
     DetailsVm.original_title = DetailsVm.data.original_title;
@@ -143,9 +144,13 @@
     DetailsVm.zip = '';
   };
 
-  DetailsVm.concatUrl = function(id) {
-    console.log(id)
-    DetailsVM.trailerUrl = 'https://www.youtube.com/embed/' + id;
+  DetailsVm.concatUrl = function() {
+    DetailsVm.trailers = DetailsVm.data.videos.results.map((trailer) => {
+      return Object.assign(trailer, {
+        url: $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + trailer.key)
+      });
+    });
+
   };
 
   DetailsVm.vote = function(review, vote, auth) {

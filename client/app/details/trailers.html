@@ -1,16 +1,11 @@
 <div class='trailers'>
   <h1>TEST</h1>
 
-  <div class='trailerVideo' ng-repeat="trailer in DetailsVm.data.videos.results">
-    <div>
-      <span class="trailerName">{{trailer.name}}</span>
-      <br>
-      <h2>{{trailer.key}}</h2>
-      {{trailerUrl = 'https://www.youtube.com/embed/' + trailer.key;""}}
-      <iframe id="ytplayer" type="text/html" width="640" height="360"
-       ng-init="DetailsVm.concatUrl(key)" src="" frameborder="0"></iframe>
-      <div>{{DetailsVm.trailerUrl}}</div>
-      <div>{{trailerUrl}}</div>
-    </div>
+  <div class='trailerVideo' ng-repeat="trailer in DetailsVm.trailers">
+    <span class="trailerName">{{trailer.name}}</span>
+    <br>
+    <iframe id="ytplayer" type="text/html" width="640" height="360"
+    src="{{trailer.url}}" frameborder="0"></iframe>
+    <div>{{DetailsVm.trailerUrl}}</div>
   </div>
 </div>

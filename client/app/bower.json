@@ -26,6 +26,7 @@
     "angular": "^1.5.8",
     "angular-ui-router": "^0.3.1",
     "underscore": "^1.8.3",
-    "moment": "^2.15.2"
+    "moment": "^2.15.2",
+    "angular-pageslide-directive": "^2.1.1"
   }
 }

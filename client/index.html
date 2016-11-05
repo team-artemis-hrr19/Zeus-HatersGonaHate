@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" ng-app="zeus" ng-cloak>
 
 <head>
@@ -24,31 +23,56 @@
 				<input class="navSearch" type="text" ng-model="ZeusVm.searchQuery" id="search-expandable" placeholder="Search..." />
 			</form>
 		</div>
-
 		<div class="navLinks">
 			<a class="navLink" href="" ng-click="ZeusVm.login()" ng-if="!isAuthenticated">Log In</a>
-			<a class="navLink" href="#/newsfeed">News Feed</a>
-			<a class="navLink" href="#/user" ng-if="isAuthenticated">My Profile</a>
-			<a class="navLink" href="" ng-click="ZeusVm.logout()" ng-if="isAuthenticated">Log Out</a>
+			<a class="navLink" href="" ng-click="ZeusVm.toggle()">News Feed</a>
+			<a class="navLink " href="#/user " ng-if="isAuthenticated ">My Profile</a>
+			<a class="navLink " href=" " ng-click="ZeusVm.logout() " ng-if="isAuthenticated ">Log Out</a>
 		</div>
+		<!--Newsfeed element in pageslide-->
+		<pageslide ps-open="ZeusVm.checked" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true" ps-size="500px ">
+			<a ng-click="ZeusVm.toggle()">Close</a>
+			<div id="news" class="ng-pageslide" ng-controller="newsFeedController">
+				<div class="recommended">
+					<h4 class="heading-medium">Recommended Users</h4>
+					<div class="recUser" ng-repeat="user in recUsers">
+						<img src="{{user.profilePicLink}} "></img>
+						<span>{{user.username}}</span>
+						<button ng-click="">Follow</button>
+						<button ng-click="closeUser(user.username)">X</button>
+					</div>
+				</div>
+				<div class="newsfeed">
+					<h4 class="heading-medium">News Feed</h4>
+					<div class="event" ng-repeat="event in events">
+						<span>{{event.emoji}}</span>
+						<div class="user-badge" ng-repeat="user in event.users">
+							<img src="{{user.profilePicLink}}"></img>
+							{{user.username}}
+						</div>
+						<button ng-click="closeEvent(event._id)">X</button>
+					</div>
+				</div>
+			</div>
+		</pageslide>
 	</div>
-
 	<!-- Angular View, this is where elements will be rendered -->
 	<ui-view id="top"></ui-view>
-
-	<div class="footer" ng-controller="zeusController as ZeusVm">
+	<div class="footer" ng-controller="zeusController as ZeusVm ">
 		<a href="/">Zeus Reviews •</a>
 		<a href="#/about">About Us •</a>
-		<a href="" ng-click="ZeusVm.goToTop()">Back to top</a>
-
+		<a href="" ng-click="ZeusVm.goToTop() ">Back to top</a>
 	</div>
-
+	<!--Newsfeed panel-->
+	<div class="newsfeed" ng-controller="zeusController as ZeusVm">
+	</div>
 	<!-- Moment Library -->
 	<script src="app/bower_components/moment/min/moment.min.js"></script>
 	<!-- Angular Script -->
 	<script src="app/bower_components/angular/angular.min.js"></script>
 	<script src="app/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="app/bower_components/underscore/underscore-min.js"></script>
+	<script src="app/bower_components/angular-pageslide-directive/dist/angular-pageslide-directive.min.js"></script>
 	<!--Material Style Script -->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>

@@ -1,5 +1,6 @@
 var User = require('../users/userModel.js');
 var helpers = require('../config/helpers.js');
+var EventController = require('../events/eventsController');
 
 module.exports = {
 
@@ -8,7 +9,9 @@ module.exports = {
     var id = req.user.sub;
     var info = req.body;
     var date = new Date();
-    User.findOne({ user_id: id })
+    User.findOne({
+        user_id: id
+      })
       .exec(function (error, data) {
         if (error) {
           console.log(error);
@@ -24,6 +27,11 @@ module.exports = {
               about: '',
               profilePicLink: info.picture || 'https://www.drupal.org/files/issues/default-avatar.png',
               favourites: []
+            });
+            // add new user join event to events table
+            EventController.addEvent({
+              type: 'USER_JOIN',
+              users: [user]
             });
             user.save(function (err, userInfo) {
               if (err) {
@@ -55,7 +63,9 @@ module.exports = {
   //Gets user info based on the username
   getUserByUsername: function (req, res, next) {
     var username = req.params.username;
-    User.find({ username: username })
+    User.find({
+        username: username
+      })
       .exec(function (err, userInfo) {
         if (err) {
           console.log(err);
@@ -69,7 +79,11 @@ module.exports = {
   editUser: function (req, res, next) {
     var id = req.user.sub;
     var data = req.body;
-    User.findOneAndUpdate({ user_id: id }, data, { new: true }, function (err, user) {
+    User.findOneAndUpdate({
+      user_id: id
+    }, data, {
+      new: true
+    }, function (err, user) {
       if (err) {
         console.log(err);
       } else {
@@ -97,7 +111,9 @@ module.exports = {
   //Gets all the users information based on the token
   getUserLists: function (req, res, next) {
     var id = req.user.sub;
-    User.find({ user_id: id })
+    User.find({
+        user_id: id
+      })
       .exec(function (err, user) {
         if (err) console.log(err);
         res.json(user);

@@ -1,15 +1,21 @@
 angular.module('zeus.newsfeed', ['pageslide-directive'])
   .controller('newsFeedController', function ($scope, $http, EventConverter, User) {
-    $scope.closeUser = function (username) {
+    $scope.notification = '';
+    $scope.closeUser = function (id) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
-      const index = $scope.recUsers.map(user => user.username)
-        .indexOf(username);
+      const index = $scope.recUsers.map(user => user._id)
+        .indexOf(id);
       $scope.recUsers[index] = random;
     };
 
+    $scope.closeNotification = function () {
+      $scope.notification = '';
+    }
+
     $scope.closeEvent = function (id) {
+      console.log('close event called', id);
       const index = $scope.events
-        .map(event => event._id)
+        .map(event => event && event._id)
         .indexOf(id);
       $scope.events = [
         ...$scope.events.slice(0, index),
@@ -17,8 +23,11 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
       ];
     };
 
-    $scope.followUser = function (id) {
+    $scope.followUser = function (id, username) {
       User.addToUserLists('following', id);
+      $scope.notification = `You are now following ${username}!`
+      $scope.closeUser(id);
+      setTimeout($scope.closeNotification, 2000);
     };
 
     $http({
@@ -51,9 +60,17 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     eventStream
       .safeApply($scope, function (events) {
         $scope.events = events.data
-          .map(event => Object.assign(event, {
-            emoji: EventConverter.getEmoji(event.type)
-          }));
+          .map(event => {
+            const emojiText = EventConverter.getEmojiText(event.type);
+            if (emojiText)
+              return Object.assign(event, {
+                emoji: emojiText.emoji,
+                preText: emojiText.preText,
+                midText: emojiText.midText,
+                postText: emojiText.postText
+              });
+          });
+        console.log($scope.events);
       })
       .subscribe();
   });

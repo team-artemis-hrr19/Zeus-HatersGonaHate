@@ -1,5 +1,8 @@
 /* Keeps brackets form rendering on page before informaiton has been retrieved */
-[ng\:cloak], [ng-cloak], .ng-cloak {
+
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
   display: none;
 }
 
@@ -16,6 +19,7 @@ body {
   min-height: 100%;
   color: #2E2E2E;
 }
+
 
 /* Fonts */
 
@@ -43,15 +47,13 @@ a:hover {
   font-weight: bold;
 }
 
-.posts {
-}
-
+.posts {}
 
 
 /* User page */
 
 div.horizontal {
-    overflow: auto;
+  overflow: auto;
 }
 
 div.horizontal::-webkit-scrollbar {
@@ -60,7 +62,7 @@ div.horizontal::-webkit-scrollbar {
 }
 
 div.horizontal::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 div.horizontal::-webkit-scrollbar-thumb {
@@ -68,36 +70,43 @@ div.horizontal::-webkit-scrollbar-thumb {
 }
 
 .table {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
 }
 
 article {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
 }
 
 
 /* General */
-.nav{
-  background-color: #060C0C;;
+
+.nav {
+  background-color: #060C0C;
   border-bottom: black solid 1px;
   padding: 0;
   left: 0;
   top: 0;
-  width:100%;
+  width: 100%;
   position: fixed;
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.85);
   white-space: nowrap;
 }
 
-.navLinks{
+.nav .badge {
+  background-color: red;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.navLinks {
   position: fixed;
   float: right;
-  top: 72px;
+  top: 30px;
   right: 30px;
 }
 
@@ -105,7 +114,7 @@ a.navLink {
   color: white;
 }
 
-a.navLink:hover{
+a.navLink:hover {
   color: #E7E7E7;
 }
 
@@ -131,7 +140,7 @@ a.navLink:hover{
   border-style: solid;
 }
 
-.searchIcon{
+.searchIcon {
   position: relative;
   color: white;
   display: inline-block;
@@ -145,11 +154,10 @@ a.navLink:hover{
   top: -20px;
 }
 
-.navSearch{
+.navSearch {
   position: relative;
   width: 500px;
 }
-
 
 .container {
   position: relative;
@@ -162,7 +170,29 @@ a.navLink:hover{
   padding-bottom: 100px;
 }
 
-.casts, .reviewUser, .reviewBody, .moviePoster, .details, .showtimeForm, .showtimeResults, .resultPoster, .resultInfo, .page, .poster-container, .profileLeft, .profileRight, .favoriteNav, .poster, .reviewMovieInfo, .reviewReviewContent, .commentUser, .commentBody, .portraitm, .actor-info, .navLinks, .logoSearch{
+.casts,
+.reviewUser,
+.reviewBody,
+.moviePoster,
+.details,
+.showtimeForm,
+.showtimeResults,
+.resultPoster,
+.resultInfo,
+.page,
+.poster-container,
+.profileLeft,
+.profileRight,
+.favoriteNav,
+.poster,
+.reviewMovieInfo,
+.reviewReviewContent,
+.commentUser,
+.commentBody,
+.portraitm,
+.actor-info,
+.navLinks,
+.logoSearch {
   position: relative;
   display: inline-block;
   margin-right: 10px;
@@ -211,19 +241,20 @@ textarea {
 }
 
 select {
-    width: 160px;
-    background-color: white;
-    border: solid 1px black;
-    outline: none;
-    display: inline-block;
-    cursor: pointer;
-    height: 20px;
-    padding-right: 20px;
+  width: 160px;
+  background-color: white;
+  border: solid 1px black;
+  outline: none;
+  display: inline-block;
+  cursor: pointer;
+  height: 20px;
+  padding-right: 20px;
 }
 
 .material-icons:hover {
   cursor: pointer;
 }
+
 
 /* movie/tv detail page */
 
@@ -253,7 +284,7 @@ select {
   margin-right: 40px;
 }
 
-button{
+button {
   background-color: #F9DC5C;
   border: black solid 0;
   border-radius: 7px;
@@ -263,7 +294,7 @@ button{
 }
 
 button:hover {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }
 
@@ -277,7 +308,7 @@ button:hover {
   position: relative;
   width: 55%;
   left: 10px;
-  vertical-align:top;
+  vertical-align: top;
 }
 
 .reviewDetails {
@@ -289,23 +320,22 @@ button:hover {
   margin-bottom: 30px;
 }
 
-.review-title{
+.review-title {
   font-size: 18px;
   font-weight: bold;
 }
 
-.reviewBody{
+.reviewBody {
   position: relative;
   width: 85%;
   /*border: black solid 1px;*/
-
 }
 
-.reviewUser{
+.reviewUser {
   position: relative;
   height: 100%;
   /*border: black solid 1px;*/
-  vertical-align:top;
+  vertical-align: top;
   margin-left: 25px;
   margin-bottom: 20px;
 }
@@ -315,7 +345,8 @@ button:hover {
   text-align: center;
 }
 
-.postDate, .rating {
+.postDate,
+.rating {
   position: relative;
   margin-bottom: 20px;
   margin-top: 2px;
@@ -356,16 +387,15 @@ button:hover {
   width: 100%;
 }
 
-.inputBox{
+.inputBox {
   position: relative;
   width: 75%;
   height: 70px;
-/*  font-size: 13px;*/
+  /*  font-size: 13px;*/
   margin-left: 20px
 }
 
-.inputRating {
-}
+.inputRating {}
 
 .postButton {
   position: relative;
@@ -393,13 +423,13 @@ button:hover {
   width: 100%;
 }
 
-.showtimes{
+.showtimes {
   width: 100%;
   position: relative;
   margin-bottom: 10px;
 }
 
-.showtimeResults{
+.showtimeResults {
   position: relative;
   height: 150px;
   width: 40%;
@@ -408,13 +438,14 @@ button:hover {
   margin-left: 130px;
 }
 
-.showtimeForm{
+.showtimeForm {
   position: relative;
   width: 40%;
   /*border: black solid 1px;*/
-  vertical-align:top;
+  vertical-align: top;
   margin-left: 20px;
 }
+
 
 /* search result page */
 
@@ -431,12 +462,13 @@ button:hover {
   /*border: black solid 1px;*/
   width: 70%;
   margin-left: 30px;
-  vertical-align:top;
+  vertical-align: top;
 }
+
 
 /* landing page */
 
-.landing{
+.landing {
   background-color: black;
   width: inherit;
   top: 0;
@@ -464,11 +496,13 @@ button:hover {
   height: 260px;
 }
 
+
 /* User profile page */
+
 .profileLeft {
   position: relative;
   width: 220px;
-  vertical-align:top;
+  vertical-align: top;
   /*border: black solid 1px;*/
 }
 
@@ -496,14 +530,14 @@ button:hover {
   padding-bottom: 12px
 }
 
-.profileNav a{
+.profileNav a {
   margin-right: 30px;
   font-size: 20px;
   padding-bottom: 11px;
   color: black;
 }
 
-.profileNav a:hover{
+.profileNav a:hover {
   color: #ED254E;
 }
 
@@ -512,7 +546,8 @@ button:hover {
   width: 220px;
 }
 
-.aboutUser, .overviewReview{
+.aboutUser,
+.overviewReview {
   position: relative;
   width: 100%;
 }
@@ -527,7 +562,7 @@ button:hover {
   width: 100%;
 }
 
-.poster{
+.poster {
   margin-right: 5px;
   margin-bottom: 30px;
 }
@@ -537,11 +572,13 @@ button:hover {
   left: 14px;
 }
 
+
 /* review page */
-.reviewReviewContent{
+
+.reviewReviewContent {
   position: relative;
   width: 75%;
-  vertical-align:top;
+  vertical-align: top;
   margin-left: 20px;
 }
 
@@ -555,7 +592,7 @@ button:hover {
   margin-top: 5px;
 }
 
-.comment-Heading{
+.comment-Heading {
   margin-top: 70px;
 }
 
@@ -563,7 +600,7 @@ button:hover {
   width: 150px;
 }
 
-.commentPosting{
+.commentPosting {
   position: relative;
   width: 100%;
   border-bottom: black solid 1px;
@@ -571,7 +608,7 @@ button:hover {
   padding-top: 30px;
 }
 
-.commentsContainer{
+.commentsContainer {
   position: relative;
   width: 100%;
   border-top: black solid 1px;
@@ -605,10 +642,10 @@ button:hover {
   margin-left: 70px;
 }
 
-.commentBody{
+.commentBody {
   position: relative;
   width: 85%;
-  vertical-align:top;
+  vertical-align: top;
 }
 
 .commentInfo {
@@ -630,8 +667,10 @@ button:hover {
   float: right;
 }
 
+
 /* edit review page */
-.editForm{
+
+.editForm {
   width: 100%;
   border-top: black solid 1px;
   margin-bottom: 100px;
@@ -651,12 +690,13 @@ button:hover {
   font-size: 20px;
 }
 
-.edit-review-buttons{
+.edit-review-buttons {
   position: relative;
   margin-top: 60px;
   left: -30px;
   float: right;
 }
+
 
 /* edit profile */
 
@@ -664,7 +704,7 @@ button:hover {
   margin-left: 20px;
 }
 
-.editAccount input{
+.editAccount input {
   width: 300px;
 }
 
@@ -682,25 +722,29 @@ button:hover {
   float: right;
 }
 
+
 /* actor detail page */
+
 .actor-info {
   position: relative;
   width: 55%;
-  vertical-align:top;
+  vertical-align: top;
   margin-left: 20px;
 }
 
-.portrait{
+.portrait {
   position: relative;
   width: 330px;
 }
 
 .landingTitle {
-    line-height: 15px;
-    padding-top: 20px;
+  line-height: 15px;
+  padding-top: 20px;
 }
 
+
 /* About page */
+
 .member {
   position: relative;
   display: inline-block;
@@ -714,22 +758,19 @@ button:hover {
   /*border-radius: 170px;*/
 }
 
-.score{
+.score {
   padding-right: 10px;
-  float:right;
+  float: right;
   font-size: 20px
 }
 
-.ratingsContainer{
+.ratingsContainer {
   margin-top: 10px;
   margin-left: 45px;
 }
 
-.logo{
+.logo {
   padding-right: 10px;
-  width: 60px; 
-  height:60px;
+  width: 60px;
+  height: 60px;
 }
-
-
-

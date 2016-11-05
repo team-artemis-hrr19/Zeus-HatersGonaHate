@@ -13,21 +13,23 @@
 </head>
 
 <body>
-	<div class="nav" ng-controller="zeusController as ZeusVm">
+	<div class="" ng-controller="zeusController as ZeusVm">
 		<!-- Title -->
-		<div class="logoSearch">
-			<a class="navlogo" href="#/"><img class="logo" src="./app/assets/logo.png" /></a>
-			<!-- Search input here -->
-			<div class="searchIcon"><i class="material-icons">search</i></div>
-			<form class="navbarForm" ng-submit="ZeusVm.search(ZeusVm.searchQuery)">
-				<input class="navSearch" type="text" ng-model="ZeusVm.searchQuery" id="search-expandable" placeholder="Search..." />
-			</form>
-		</div>
-		<div class="navLinks">
-			<a class="navLink" href="" ng-click="ZeusVm.login()" ng-if="!isAuthenticated">Log In</a>
-			<a class="navLink" href="" ng-click="ZeusVm.toggle()">News Feed</a>
-			<a class="navLink " href="#/user " ng-if="isAuthenticated ">My Profile</a>
-			<a class="navLink " href=" " ng-click="ZeusVm.logout() " ng-if="isAuthenticated ">Log Out</a>
+		<div class="nav">
+			<div class="logoSearch">
+				<a class="navlogo" href="#/"><img class="logo" src="./app/assets/logo.png" /></a>
+				<!-- Search input here -->
+				<div class="searchIcon"><i class="material-icons">search</i></div>
+				<form class="navbarForm" ng-submit="ZeusVm.search(ZeusVm.searchQuery)">
+					<input class="navSearch" type="text" ng-model="ZeusVm.searchQuery" id="search-expandable" placeholder="Search..." />
+				</form>
+			</div>
+			<div class="navLinks">
+				<a class="navLink" href="" ng-click="ZeusVm.login()" ng-if="!isAuthenticated">Log In</a>
+				<a class="navLink" href="" ng-click="ZeusVm.toggle()"><span class="badge">3</span> News Feed</a>
+				<a class="navLink " href="#/user " ng-if="isAuthenticated">My Profile</a>
+				<a class="navLink " href=" " ng-click="ZeusVm.logout() " ng-if="isAuthenticated">Log Out</a>
+			</div>
 		</div>
 		<!--Newsfeed element in pageslide-->
 		<pageslide ps-open="ZeusVm.checked" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true" ps-size="500px ">

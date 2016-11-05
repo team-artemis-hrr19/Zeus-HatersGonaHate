@@ -6,7 +6,7 @@ const EventSchema = new mongoose.Schema({
   movies: Array,
   date: Date,
   media: Array,
-  text: String
+  text: String,
   data: Object
 });
 

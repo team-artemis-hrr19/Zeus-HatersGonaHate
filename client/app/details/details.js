@@ -143,6 +143,11 @@
     DetailsVm.zip = '';
   };
 
+  DetailsVm.concatUrl = function(id) {
+    console.log(id)
+    DetailsVM.trailerUrl = 'https://www.youtube.com/embed/' + id;
+  };
+
   DetailsVm.vote = function(review, vote, auth) {
     if (auth) {
       Reviews.upvote(review._id, vote)
@@ -246,6 +251,14 @@
   };
 
   DetailsVm.login = authService.login;
+})
+.directive('trailers', function() {
+  return {
+    restrict: 'AE',
+    replace: true,
+    scope: true,
+    templateUrl: 'app/details/trailers.html'
+  };
 })
 .directive('showtimes', function() {
   return {

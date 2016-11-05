@@ -1,5 +1,5 @@
-angular.module('zeus.newsfeed', [])
-  .controller('newsFeedController', function ($scope, $http, EventConverter) {
+angular.module('zeus.newsfeed', ['pageslide-directive'])
+  .controller('newsFeedController', function ($scope, $http, EventConverter, $attrs) {
     $scope.closeUser = function (username) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
       const index = $scope.recUsers.map(user => user.username)
@@ -8,11 +8,9 @@ angular.module('zeus.newsfeed', [])
     };
 
     $scope.closeEvent = function (id) {
-      console.log('close event', id);
       const index = $scope.events
         .map(event => event._id)
         .indexOf(id);
-      console.log(index);
       $scope.events = [
         ...$scope.events.slice(0, index),
         ...$scope.events.slice(index + 1)
@@ -44,7 +42,10 @@ angular.module('zeus.newsfeed', [])
     eventStream
       .safeApply($scope, function (events) {
         $scope.events = events.data
-          .map(event => Object.assign(event, { emoji: EventConverter.getEmoji(event.type) }));
+          .map(event => Object.assign(event, {
+            emoji: EventConverter.getEmoji(event.type)
+          }));
+        console.log($scope.events);
       })
       .subscribe();
   });

@@ -14,31 +14,30 @@ angular.module('zeus.landing', ['pageslide-directive'])
       LandingVm.checked = !LandingVm.checked;
     };
 
-    var fetchUsersRatings = function(contentArray, type){
-      console.log('testing')      
-      // var randomRating = function(){
-      //   var val = (Math.random() * 4) + 1
-      //   return val.toFixed(1) 
-      // };
+    var fetchUsersRatings = function(contentArray, type){     
+      var randomRating = function(){
+        var val = (Math.random() * 4) + 1
+        return val.toFixed(1) 
+      };
 
-      // var getRatingsById = function(id, index){
-      //   Reviews.getReviews(type, id).then(function(movieReviews){
-      //     var zeusRatings = movieReviews.data.reviews.map(function(review){
-      //       return review.rating;
-      //     });
-      //     var sum = zeusRatings.reduce(function(memo, rating){
-      //       return memo +rating;
-      //     },0)
-      //     var zeusRating = sum === 0 ? randomRating() : (sum/zeusRatings.length).toFixed(1);
-      //     var content = contentArray[index]
-      //     content.zeusRating = zeusRating;
-      //   })
-      // }
+      var getRatingsById = function(id, index){
+        Reviews.getReviews(type, id).then(function(movieReviews){
+          var zeusRatings = movieReviews.data.reviews.map(function(review){
+            return review.rating;
+          });
+          var sum = zeusRatings.reduce(function(memo, rating){
+            return memo +rating;
+          },0)
+          var zeusRating = sum === 0 ? randomRating() : (sum/zeusRatings.length).toFixed(1);
+          var content = contentArray[index]
+          content.zeusRating = zeusRating;
+        })
+      }
       
-      // var contentIds = contentArray.map(function(content){
-      //   return content.id
-      // });
-      // contentIds.forEach(getRatingsById)
+      var contentIds = contentArray.map(function(content){
+        return content.id
+      });
+      contentIds.forEach(getRatingsById)
     };
 
     LandingVm.fetchPopularMovies = function() {

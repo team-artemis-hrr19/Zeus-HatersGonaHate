@@ -7,7 +7,7 @@ angular.module('zeus.services', [])
     var getDetails = function (type, id, callback) {
       return $http({
         method: 'GET',
-        url: 'https://api.themoviedb.org/3/' + type + '/' + id + '?api_key=' + theMovieDbAPIKey + '&language=en-US'
+        url: 'https://api.themoviedb.org/3/' + type + '/' + id + '?api_key=' + theMovieDbAPIKey + '&language=en-US&append_to_response=videos'
       }).then(function (res) {   //first callback executes if request is successful
         return res.data;
       }, function (res) {        //second callback is executed if there was an error
@@ -62,13 +62,36 @@ angular.module('zeus.services', [])
       });
     };
 
+    //convert showtimes from 24hr to 12hr
+    var normalizeTime = function (time) {
+      var newTime;
+      time = time.split(':');
+      if (time[0] > 12) {
+        time[0] -= 12;
+        newTime = time.join(':');
+        newTime += 'pm';
+      } else if (time[0] === 12) {
+        newTime = time.join(':');
+        newTime += 'pm';
+      } else if (time[0] === '00') {
+        time[0] = 12;
+        newTime = time.join(':');
+        newTime += 'am';
+      } else {
+        newTime = time.join(':');
+        newTime += 'am';
+      }
+      return newTime;
+    };
+
     return {
       getDetails: getDetails,
       getShowtimes: getShowtimes,
       getActors: getActors,
       getUserFavorites: getUserFavorites,
       addToUserLists: addToUserLists,
-      deleteFavOrWatch: deleteFavOrWatch
+      deleteFavOrWatch: deleteFavOrWatch,
+      normalizeTime: normalizeTime
     };
   })
   .factory('Reviews', function ($http) {

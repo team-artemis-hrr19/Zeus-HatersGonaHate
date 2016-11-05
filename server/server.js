@@ -1,11 +1,17 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var path = require('path');
+
+var fillUsers = require('./fillUsers');
+var fillEvents = require('./fillEvents')
+//fillUsers() //used to create lots of fake users for testing
+//fillEvents();
+
 var app = express();
 
 var port = 3000;
-
-app.use(express.static('../client'));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.json());
 
 //Your DB connection here

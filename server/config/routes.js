@@ -1,12 +1,13 @@
-var reviewController = require('../reviews/reviewController.js');
-var userController = require('../users/userController.js');
-var commentController = require('../comments/commentController.js');
+var reviewController = require('../reviews/reviewController');
+var userController = require('../users/userController');
+var eventController = require('../events/eventsController');
+var commentController = require('../comments/commentController');
 var jwt = require('express-jwt');
 
 //Checks the token for authentication when attatched to route
 var authCheck = jwt({
-  secret: new Buffer('PUT YOUR AUTH0 SECRET HERE', 'base64'),
-  audience: 'AUTH0 CLIENT ID HERE'
+  secret: new Buffer('xb2O15v26aHQwrEBHj9g0ClMWPUU8qbQic2nWheL1ZILYWesPn3V67nPGF8H95Lv', 'base64'),
+  audience: '0cUlkKsftRF5gApO4Y6ojv3Rk5PZX8eE'
 });
 
 module.exports = function (app, express) {
@@ -36,6 +37,8 @@ module.exports = function (app, express) {
 
   app.get('/user/reviews/:userId', reviewController.getUserReviews);
 
+  app.get('/user', userController.getAllUsers);
+
   app.post('/user', authCheck, userController.postUser);
 
   app.put('/user/edit', authCheck, userController.editUser);
@@ -48,5 +51,8 @@ module.exports = function (app, express) {
   app.delete('/delete/:type', authCheck, userController.removeFromUserLists);
 
   app.post('/add/:type', authCheck, userController.addToUserLists);
+
+  // Events Routes
+  app.get('/event', eventController.getEvents);
 
 };

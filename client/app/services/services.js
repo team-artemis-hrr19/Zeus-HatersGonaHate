@@ -343,7 +343,23 @@ angular.module('zeus.services', [])
       deleteComment: deleteComment
     };
   })
+  .factory('EventConverter', function () {
+    const getEmoji = type => {
+      const emojis = {
+        USER_JOIN: '👋',
+        NEW_REVIEW: '🌟',
+        FOLLOW: '✌️',
+        THUMBS_UP: '👍',
+        THUMBS_DOWN: '👎'
+      };
 
+      return emojis[type];
+    };
+
+    return {
+      getEmoji
+    };
+  })
   .service('authService', authService);
 
 authService.$inject = ['lock', 'authManager', '$q'];

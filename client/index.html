@@ -40,7 +40,7 @@
 					<div class="recUser" ng-repeat="user in recUsers">
 						<img src="{{user.profilePicLink}} "></img>
 						<span>{{user.username}}</span>
-						<button ng-click="">Follow</button>
+						<button ng-click="followUser(user._id)">Follow</button>
 						<button ng-click="closeUser(user.username)">X</button>
 					</div>
 				</div>

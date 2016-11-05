@@ -1,5 +1,5 @@
 angular.module('zeus.newsfeed', ['pageslide-directive'])
-  .controller('newsFeedController', function ($scope, $http, EventConverter, $attrs) {
+  .controller('newsFeedController', function ($scope, $http, EventConverter, User) {
     $scope.closeUser = function (username) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
       const index = $scope.recUsers.map(user => user.username)
@@ -16,6 +16,15 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
         ...$scope.events.slice(index + 1)
       ];
     };
+
+    $scope.followUser = function (id) {
+      User.addToUserLists('following', id);
+    };
+
+    $http({
+      method: 'GET',
+      url: 'following'
+    }).then(following => $scope.following = following);
 
     // streams
     const userStream = Rx.Observable.fromPromise(
@@ -45,7 +54,6 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
           .map(event => Object.assign(event, {
             emoji: EventConverter.getEmoji(event.type)
           }));
-        console.log($scope.events);
       })
       .subscribe();
   });

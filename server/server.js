@@ -5,8 +5,8 @@ var path = require('path');
 
 var fillUsers = require('./fillUsers');
 var fillEvents = require('./fillEvents')
-//fillUsers() //used to create lots of fake users for testing
-//fillEvents();
+  //fillUsers() //used to create lots of fake users for testing
+  //fillEvents();
 
 var app = express();
 

@@ -13,43 +13,51 @@
 </head>
 
 <body>
-	<div class="nav" ng-controller="zeusController as ZeusVm">
+	<div class="" ng-controller="zeusController as ZeusVm">
 		<!-- Title -->
-		<div class="logoSearch">
-			<a class="navlogo" href="#/"><img class="logo" src="./app/assets/logo.png" /></a>
-			<!-- Search input here -->
-			<div class="searchIcon"><i class="material-icons">search</i></div>
-			<form class="navbarForm" ng-submit="ZeusVm.search(ZeusVm.searchQuery)">
-				<input class="navSearch" type="text" ng-model="ZeusVm.searchQuery" id="search-expandable" placeholder="Search..." />
-			</form>
-		</div>
-		<div class="navLinks">
-			<a class="navLink" href="" ng-click="ZeusVm.login()" ng-if="!isAuthenticated">Log In</a>
-			<a class="navLink" href="" ng-click="ZeusVm.toggle()">News Feed</a>
-			<a class="navLink " href="#/user " ng-if="isAuthenticated ">My Profile</a>
-			<a class="navLink " href=" " ng-click="ZeusVm.logout() " ng-if="isAuthenticated ">Log Out</a>
+		<div class="nav">
+			<div class="logoSearch">
+				<a class="navlogo" href="#/"><img class="logo" src="./app/assets/logo.png" /></a>
+				<!-- Search input here -->
+				<div class="searchIcon"><i class="material-icons">search</i></div>
+				<form class="navbarForm" ng-submit="ZeusVm.search(ZeusVm.searchQuery)">
+					<input class="navSearch" type="text" ng-model="ZeusVm.searchQuery" id="search-expandable" placeholder="Search..." />
+				</form>
+			</div>
+			<div class="navLinks">
+				<a class="navLink" href="" ng-click="ZeusVm.login()" ng-if="!isAuthenticated">Log In</a>
+				<a class="navLink" href="" ng-click="ZeusVm.toggle()"><span class="badge">3</span> News Feed</a>
+				<a class="navLink " href="#/user " ng-if="isAuthenticated">My Profile</a>
+				<a class="navLink " href=" " ng-click="ZeusVm.logout() " ng-if="isAuthenticated">Log Out</a>
+			</div>
 		</div>
 		<!--Newsfeed element in pageslide-->
 		<pageslide ps-open="ZeusVm.checked" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true" ps-size="500px ">
 			<a ng-click="ZeusVm.toggle()">Close</a>
 			<div id="news" class="ng-pageslide" ng-controller="newsFeedController">
-				<div class="recommended">
-					<h4 class="heading-medium">Recommended Users</h4>
+				<p ng-if="notification" class="notification">{{notification}}
+					<a ng-click="closeNotification()">X</a>
+				</p>
+				<div class="trending">
+					<h4 class="heading-medium news-heading">Trending Users</h4>
+					</h4>
 					<div class="recUser" ng-repeat="user in recUsers">
-						<img src="{{user.profilePicLink}} "></img>
-						<span>{{user.username}}</span>
-						<button ng-click="">Follow</button>
-						<button ng-click="closeUser(user.username)">X</button>
+						<img class="recBadge" src="{{user.profilePicLink}} "></img>
+						<span class="recName">{{user.username}}
+						<button class="recButton" ng-click="closeUser(user._id)">X</button>
+						<button class="recButton" ng-click="followUser(user._id, user.username)">Follow</button>
+						</span>
 					</div>
 				</div>
 				<div class="newsfeed">
-					<h4 class="heading-medium">News Feed</h4>
+					<h4 class="heading-medium news-heading">News Feed</h4>
 					<div class="event" ng-repeat="event in events">
 						<span>{{event.emoji}}</span>
-						<div class="user-badge" ng-repeat="user in event.users">
-							<img src="{{user.profilePicLink}}"></img>
+						<span class="user-badge" ng-repeat="user in event.users">
+							{{event.preText}}<img src="{{user.profilePicLink}}"></img>
 							{{user.username}}
-						</div>
+							{{event.postText}}
+						</span>
 						<button ng-click="closeEvent(event._id)">X</button>
 					</div>
 				</div>

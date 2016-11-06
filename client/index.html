@@ -39,7 +39,7 @@
 					<a ng-click="closeNotification()">X</a>
 				</p>
 				<div class="trending">
-					<h4 class="heading-small">Trending Users</h4>
+					<h4 class="heading-medium news-heading">Trending Users</h4>
 					</h4>
 					<div class="recUser" ng-repeat="user in recUsers">
 						<img class="recBadge" src="{{user.profilePicLink}} "></img>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<div class="newsfeed">
-					<h4 class="heading-smaller">News Feed</h4>
+					<h4 class="heading-medium news-heading">News Feed</h4>
 					<div class="event" ng-repeat="event in events">
 						<span>{{event.emoji}}</span>
 						<span class="user-badge" ng-repeat="user in event.users">

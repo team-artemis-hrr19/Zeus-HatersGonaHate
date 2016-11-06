@@ -713,7 +713,7 @@ button:hover {
   width: 170px;
   /*border-radius: 170px;*/
 }
-
+/*-------details page ratings style start----------*/
 .score{
   padding-right: 10px;
   float:right;
@@ -730,8 +730,27 @@ button:hover {
   width: 60px; 
   height:60px;
 }
+/*-------details page ratings style end ----------*/
 
+/*-------landing page ratings style start----------*/
+.companyLogo{
+  max-height: 40px;
+  max-width: 50px;
+}
+.ratingArea {
+  margin-top: 10px;
+}
 
-
+.landingRatingsContainer{
+  display:inline-block;
+}
+.content-show-hide {
+  transition: all linear .5s;
+}
+.content-show-hide.ng-hide {
+  opacity: 0;
+}
+.con
+/*-------landing page ratings style end----------*/
 
 

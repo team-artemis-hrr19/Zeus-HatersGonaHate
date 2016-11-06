@@ -18,34 +18,34 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     };
 
     // streams
-    const userStream = Rx.Observable.fromPromise(
-      $http({
-        method: 'GET',
-        url: '/user'
-      })
-    );
+    // const userStream = Rx.Observable.fromPromise(
+    //   $http({
+    //     method: 'GET',
+    //     url: '/user'
+    //   })
+    // );
 
-    userStream
-      .safeApply($scope, users => {
-        $scope.users = users.data;
-        $scope.recUsers = $scope.users.slice(0, 3);
-      })
-      .subscribe();
+    // userStream
+    //   .safeApply($scope, users => {
+    //     $scope.users = users.data;
+    //     $scope.recUsers = $scope.users.slice(0, 3);
+    //   })
+    //   .subscribe();
 
-    const eventStream = Rx.Observable.fromPromise(
-      $http({
-        method: 'GET',
-        url: '/event'
-      })
-    );
+    // const eventStream = Rx.Observable.fromPromise(
+    //   $http({
+    //     method: 'GET',
+    //     url: '/event'
+    //   })
+    // );
 
-    eventStream
-      .safeApply($scope, function (events) {
-        $scope.events = events.data
-          .map(event => Object.assign(event, {
-            emoji: EventConverter.getEmoji(event.type)
-          }));
-        console.log($scope.events);
-      })
-      .subscribe();
+    // eventStream
+    //   .safeApply($scope, function (events) {
+    //     $scope.events = events.data
+    //       .map(event => Object.assign(event, {
+    //         emoji: EventConverter.getEmoji(event.type)
+    //       }));
+    //     console.log($scope.events);
+    //   })
+    //   .subscribe();
   });

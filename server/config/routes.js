@@ -37,9 +37,11 @@ module.exports = function (app, express) {
 
   app.get('/user/reviews/:userId', reviewController.getUserReviews);
 
-  app.get('/user', userController.getAllUsers);
+  app.get('/user', authCheck, userController.getAllUsers);
 
   app.post('/user', authCheck, userController.postUser);
+
+  app.put('/user/add', authCheck, userController.addToUserLists);
 
   app.put('/user/edit', authCheck, userController.editUser);
 
@@ -47,6 +49,8 @@ module.exports = function (app, express) {
 
   //User favorites/watched/currently watching routes
   app.get('/favorites', authCheck, userController.getUserLists);
+
+  app.get('/following', userController.getUserLists);
 
   app.delete('/delete/:type', authCheck, userController.removeFromUserLists);
 

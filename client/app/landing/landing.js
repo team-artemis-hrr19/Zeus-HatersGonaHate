@@ -1,4 +1,4 @@
-angular.module('zeus.landing', ['pageslide-directive'])
+angular.module('zeus.landing', ['pageslide-directive','ngAnimate'])
   .controller('LandingController', function (Landing, Reviews) {
     // capture the value of `this` in a variable vm
     // vm stands for view model and is a replacement for $scope
@@ -28,7 +28,7 @@ angular.module('zeus.landing', ['pageslide-directive'])
           var sum = zeusRatings.reduce(function(memo, rating){
             return memo +rating;
           },0)
-          var zeusRating = sum === 0 ? randomRating() : (sum/zeusRatings.length).toFixed(1);
+          var zeusRating = sum === 0 ? "Be the first to rate this!" : (sum/zeusRatings.length).toFixed(1);
           var content = contentArray[index]
           content.zeusRating = zeusRating;
         })

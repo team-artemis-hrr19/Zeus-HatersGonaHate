@@ -758,6 +758,7 @@ button:hover {
   /*border-radius: 170px;*/
 }
 
+
 .score {
   padding-right: 10px;
   float: right;
@@ -774,3 +775,22 @@ button:hover {
   width: 60px;
   height: 60px;
 }
+.companyLogo{
+  max-height: 40px;
+  max-width: 50px;
+}
+.ratingArea {
+  margin-top: 10px;
+}
+
+.landingRatingsContainer{
+  display:inline-block;
+}
+.content-show-hide {
+  transition: all linear .5s;
+}
+.content-show-hide.ng-hide {
+  opacity: 0;
+}
+
+

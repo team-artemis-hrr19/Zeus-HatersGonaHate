@@ -1,17 +1,15 @@
 <article>
   <a href="#/details/movie/{{ popularmovie.id }}">
-      <div class="poster-container" ng-mouseover="value= false" ng-mouseleave=" value = true" ng-init='value=true'>
+      <div class="poster-container" ng-mouseover="value= false" ng-mouseleave=" value = true" ng-init='value = true'>
         <!-- If no poster_path, show dummy image -->
         <img ng-hide="!popularmovie.poster_path" src="http://image.tmdb.org/t/p/w185/{{popularmovie.poster_path}}" alt="">
         <img ng-show="!popularmovie.poster_path" src="http://dummyimage.com/185x275/000/fff&text={{popularmovie.name}}" alt="">
-       
-        <div ng-hide='value'>
-          <div calss= ratingsContainer>
-            <img class='landingLogo' src='../app/assets/logo.png'> 
-            <p>{{popularmovie.zeusRating}}</p>
+        <div class='ratingArea content-show-hide' ng-hide='value'>
+          <div class="landingRatingsContainer" >
+            <div>{{popularmovie.zeusRating}}</div>
+            <img class="companyLogo" src='../app/assets/logo.png'> 
           </div> 
         </div>
-
       </div>
   </a>
 </article>

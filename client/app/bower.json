@@ -28,6 +28,7 @@
     "underscore": "^1.8.3",
     "moment": "^2.15.2",
     "angular-pageslide-directive": "^2.1.1",
+    "angular-animate": "1.5.8",
     "rxjs": "^4.1.0",
     "rx-angular": "angular-rx#^1.1.3"
   }

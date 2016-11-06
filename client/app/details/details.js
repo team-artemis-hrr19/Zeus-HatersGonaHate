@@ -1,5 +1,5 @@
  angular.module('zeus.details', [])
-.controller('DetailsController', function($location, Details, Reviews, $stateParams, authService) {
+.controller('DetailsController', function($sce, $location, Details, Reviews, $stateParams, authService) {
   // capture the value of `this` in a variable vm
   // vm stands for view model and is a replacement for $scope
   var DetailsVm = this;
@@ -30,6 +30,8 @@
       $location.path(404);
     }
     DetailsVm.data = data; // save all movie details for the requested movie
+    DetailsVm.concatUrl();
+
     //convenience properties for shorthand in html views
     DetailsVm.original_title = DetailsVm.data.original_title;
     DetailsVm.original_name = DetailsVm.data.original_name;
@@ -107,7 +109,6 @@
   //function is called when the user submits a zip code to get local showtimes
   DetailsVm.getShowtimes = function(movieTitle) {
     Details.getShowtimes(DetailsVm.fullDate, DetailsVm.zip).then(function(allShowtimes) {
-      // DetailsVm.showtimes = allShowtimes;  
       var nowPlaying = [];
       if (allShowtimes) {
         allShowtimes.forEach(function(showtime) {
@@ -118,19 +119,19 @@
                 nowPlaying.push(
                   {
                     theatreName: showing.theatre.name,
-                    showings: [showing.dateTime.slice(11)],
+                    showings: [Details.normalizeTime(showing.dateTime.slice(11))],
                     ticketURI: showing.ticketURI
                   }
                 );
               } else {
                 for (var i = 0; i < length; i++) {
                   if (nowPlaying[i] && nowPlaying[i].theatreName === showing.theatre.name) {
-                    nowPlaying[i].showings.push(showing.dateTime.slice(11));
+                    nowPlaying[i].showings.push(Details.normalizeTime(showing.dateTime.slice(11)));
                   } else if (i === length - 1) {
                     nowPlaying.push(
                       {
                         theatreName: showing.theatre.name,
-                        showings: [showing.dateTime.slice(11)],
+                        showings: [Details.normalizeTime(showing.dateTime.slice(11))],
                         ticketURI: showing.ticketURI
                       }
                     );
@@ -140,7 +141,7 @@
             });
           }
         });
-        if (!nowPlaying) {       //fix to work with Objects
+        if (!nowPlaying) {
           DetailsVm.hasNoShowtime = true;
         }
       } else {
@@ -149,6 +150,15 @@
       DetailsVm.showtimes = nowPlaying;
     });
     DetailsVm.zip = '';
+  };
+
+  DetailsVm.concatUrl = function() {
+    DetailsVm.trailers = DetailsVm.data.videos.results.map((trailer) => {
+      return Object.assign(trailer, {
+        url: $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + trailer.key)
+      });
+    });
+
   };
 
   DetailsVm.vote = function(review, vote, auth) {
@@ -254,6 +264,14 @@
   };
 
   DetailsVm.login = authService.login;
+})
+.directive('trailers', function() {
+  return {
+    restrict: 'AE',
+    replace: true,
+    scope: true,
+    templateUrl: 'app/details/trailers.html'
+  };
 })
 .directive('showtimes', function() {
   return {

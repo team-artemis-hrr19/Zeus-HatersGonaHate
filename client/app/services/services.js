@@ -339,20 +339,31 @@ angular.module('zeus.services', [])
     };
   })
   .factory('EventConverter', function () {
-    const getEmoji = type => {
+    const getEmojiText = type => {
       const emojis = {
-        USER_JOIN: '👋',
-        NEW_REVIEW: '🌟',
-        FOLLOW: '✌️',
+        USER_JOIN: {
+          emoji: '👋',
+          preText: 'New user',
+          midText: '',
+          postText: 'just joined!!'
+        },
+        NEW_REVIEW: {
+          emoji: '🌟',
+          preText: 'New review:',
+          postText: 'just rated'
+        },
+        FOLLOW: {
+          emoji: '✌️',
+          midText: 'just followed'
+        },
         THUMBS_UP: '👍',
         THUMBS_DOWN: '👎'
       };
-
       return emojis[type];
     };
 
     return {
-      getEmoji
+      getEmojiText
     };
   })
   .service('authService', authService);

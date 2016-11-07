@@ -25,6 +25,7 @@ module.exports = {
     });
     EventController.addEvent({
       type: 'NEW_REVIEW',
+      //FIXME: this stores the user token but not the username
       users: [req.user],
       date: review.date,
       text: review.title,

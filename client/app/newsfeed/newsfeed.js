@@ -45,7 +45,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
 
     userStream
       .safeApply($scope, users => {
-        $scope.users = users.data;
+        $scope.users = users.data.reverse();
         $scope.recUsers = $scope.users.slice(0, 3);
       })
       .subscribe();
@@ -55,6 +55,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     eventStream
       .safeApply($scope, function (events) {
         $scope.events = events.data
+          .reverse()
           .map(event => {
             const emojiText = Event.getEmojiText(event.type);
             if (emojiText)
@@ -65,6 +66,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
                 postText: emojiText.postText
               });
           });
+        console.log($scope.events);
       })
       .subscribe();
   });

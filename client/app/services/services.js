@@ -392,9 +392,10 @@ angular.module('zeus.services', [])
           preText: 'New review:',
           postText: 'just rated'
         },
-        FOLLOW: {
+        following: {
           emoji: '✌️',
-          midText: 'just followed'
+          midText: 'just followed',
+          postText: 'BFFs forever'
         },
         favorites: {
           emoji: '😊',

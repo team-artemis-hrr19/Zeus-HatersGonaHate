@@ -1,7 +1,10 @@
 <div class='details'>
   <h3 class="heading-medium" ng-if="DetailsVm.original_name === undefined"> {{DetailsVm.original_title}} </h3>
   <h3 ng-if="DetailsVm.original_title === undefined"> {{DetailsVm.original_name}} </h3>
-
+  <div ng-if="DetailsVm.type === 'movie'">
+    <h5 class="heading-small">Rating</h5>
+    <p>{{DetailsVm.rating}}</p>
+  </div>
   <h5 class="heading-small" ng-if="DetailsVm.data.release_date !== undefined">Release Date</h5>
   <p ng-if="DetailsVm.data.release_date !== undefined">{{DetailsVm.data.release_date}}</p>
   <h5 class="heading-small" ng-if="DetailsVm.data.runtime !== undefined">Movie Length</h5>

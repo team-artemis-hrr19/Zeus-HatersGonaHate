@@ -8,7 +8,10 @@
   <div class="showtimeResults">
     <div ng-repeat="showtime in DetailsVm.showtimes" class="showtime">
       <h3>{{ showtime.theatreName }}</h3>
-      <span ng-repeat="time in showtime.showings"><a href="{{showtime.ticketURI}}">{{time}}</a> </span>
+      <span ng-repeat="time in showtime.showings">
+        <a ng-if="showtime" href="{{showtime.ticketURI}}">{{time}}</a>
+         
+      </span>
     </div>
 
     <p ng-if="DetailsVm.hasNoShowtime">This movie is not currently in theatres near you!</p>

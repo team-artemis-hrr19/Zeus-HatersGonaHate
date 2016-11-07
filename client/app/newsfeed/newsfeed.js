@@ -1,5 +1,5 @@
 angular.module('zeus.newsfeed', ['pageslide-directive'])
-  .controller('newsFeedController', function ($scope, $http, Event, User) {
+  .controller('newsFeedController', function ($scope, $http, Event, Details) {
     $scope.notification = '';
     $scope.closeUser = function (id) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
@@ -24,7 +24,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     };
 
     $scope.followUser = function (id, username) {
-      User.addToUserLists('following', id);
+      Details.addToUserLists('following', id);
       $scope.notification = `You are now following ${username}!`
       $scope.closeUser(id);
       setTimeout($scope.closeNotification, 2000);

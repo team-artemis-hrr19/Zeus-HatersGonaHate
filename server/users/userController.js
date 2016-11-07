@@ -99,6 +99,13 @@ module.exports = {
     var payload = req.body.payload;
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
+    // TODO: add user events to news feed
+    EventController.addEvent({
+      type,
+      users: [id],
+      data: payload,
+      date: new Date()
+    });
   },
 
   //Removes data from the list based on the type param ('favorites', 'watched', 'currentlyWatching')

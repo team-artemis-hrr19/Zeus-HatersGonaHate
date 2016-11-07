@@ -14,7 +14,6 @@
 
 <body>
 	<div class="" ng-controller="zeusController as ZeusVm">
-		Events {{ZeusVm.events}}
 		<!-- Title -->
 		<div class="nav">
 			<div class="logoSearch">
@@ -33,9 +32,10 @@
 			</div>
 		</div>
 		<!--Newsfeed element in pageslide-->
-		<pageslide ps-open="ZeusVm.checked" ps-click-outside="true" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true"
-				ps-size="500px ">
+		<pageslide ps-open="ZeusVm.checked" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true" ps-size="500px ">
 			<div id="news" class="ng-pageslide" ng-controller="newsFeedController">
+				<p></p>
+				<button ng-click="ZeusVm.toggle()">Close</button>
 				<p ng-if="notification" class="notification">{{notification}}
 					<a ng-click="closeNotification()">X</a>
 				</p>

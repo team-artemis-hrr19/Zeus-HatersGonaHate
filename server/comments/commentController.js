@@ -1,6 +1,7 @@
 var Comment = require('../comments/commentModel.js');
 var User = require('../users/userModel.js');
 var helpers = require('../config/helpers.js');
+var EventController = require('../events/eventsController');
 
 module.exports = {
 

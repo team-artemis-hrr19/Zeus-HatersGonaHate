@@ -1,5 +1,5 @@
 angular.module('zeus.newsfeed', ['pageslide-directive'])
-  .controller('newsFeedController', function ($scope, $http, EventConverter, User) {
+  .controller('newsFeedController', function ($scope, $http, Event, Details) {
     $scope.notification = '';
     $scope.closeUser = function (id) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
@@ -24,7 +24,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     };
 
     $scope.followUser = function (id, username) {
-      User.addToUserLists('following', id);
+      Details.addToUserLists('following', id);
       $scope.notification = `You are now following ${username}!`
       $scope.closeUser(id);
       setTimeout($scope.closeNotification, 2000);
@@ -45,23 +45,19 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
 
     userStream
       .safeApply($scope, users => {
-        $scope.users = users.data;
+        $scope.users = users.data.reverse();
         $scope.recUsers = $scope.users.slice(0, 3);
       })
       .subscribe();
 
-    const eventStream = Rx.Observable.fromPromise(
-      $http({
-        method: 'GET',
-        url: '/event'
-      })
-    );
+    const eventStream = Rx.Observable.fromPromise(Event.getEvents());
 
     eventStream
       .safeApply($scope, function (events) {
         $scope.events = events.data
+          .reverse()
           .map(event => {
-            const emojiText = EventConverter.getEmojiText(event.type);
+            const emojiText = Event.getEmojiText(event.type);
             if (emojiText)
               return Object.assign(event, {
                 emoji: emojiText.emoji,
@@ -70,6 +66,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
                 postText: emojiText.postText
               });
           });
+        console.log($scope.events);
       })
       .subscribe();
   });

@@ -1,7 +1,7 @@
 var Review = require('../reviews/reviewModel.js');
 var User = require('../users/userModel.js');
 var helpers = require('../config/helpers.js');
-
+var EventController = require('../events/eventsController');
 module.exports = {
 
   //when user posts a review, this method saves it to the database
@@ -25,6 +25,7 @@ module.exports = {
     });
     EventController.addEvent({
       type: 'NEW_REVIEW',
+      //FIXME: this stores the user token but not the username
       users: [req.user],
       date: review.date,
       text: review.title,

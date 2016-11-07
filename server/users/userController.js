@@ -101,7 +101,6 @@ module.exports = {
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
     const users = [];
-    const movie = null;
     const dbRequests = [
       User.findOne({
         user_id: id

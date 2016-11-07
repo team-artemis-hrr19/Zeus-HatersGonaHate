@@ -390,7 +390,8 @@ angular.module('zeus.services', [])
         NEW_REVIEW: {
           emoji: '🌟',
           preText: 'New review:',
-          postText: 'just rated'
+          midText: 'just rated',
+          postText: '!'
         },
         following: {
           emoji: '✌️',

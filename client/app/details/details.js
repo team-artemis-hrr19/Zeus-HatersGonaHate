@@ -48,6 +48,7 @@
              DetailsVm.scores.IMDb = data.imdbRating;
              DetailsVm.scores.Metacritic = data.Metascore;
              DetailsVm.actors = data.Actors.split(',');
+             DetailsVm.rating = data.Rated;
            });
              //if the selection is a tv show
          } else if (DetailsVm.original_name !== undefined) {

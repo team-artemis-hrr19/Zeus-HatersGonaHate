@@ -40,6 +40,7 @@ module.exports = {
 
   //Checks the type given in the route and adds the item/data that list
   addToListByType: function (id, data, type, res) {
+    console.log('adding to list', id, data, type);
     if (type === 'favorites') {
       User.findOneAndUpdate({
         user_id: id

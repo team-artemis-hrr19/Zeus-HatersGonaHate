@@ -99,7 +99,6 @@ module.exports = {
     var payload = req.body;
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
-    res.sendStatus(200);
   },
 
   //Removes data from the list based on the type param ('favorites', 'watched', 'currentlyWatching')

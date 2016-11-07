@@ -8,7 +8,7 @@ angular.module('zeus.services', [])
       return $http({
         method: 'GET',
         url: 'https://api.themoviedb.org/3/' + type + '/' + id + '?api_key=' + theMovieDbAPIKey + '&language=en-US&append_to_response=videos'
-      }).then(function (res) {   //first callback executes if request is successful
+      }).then(function (res) { //first callback executes if request is successful
         return res.data;
       }, function (res) { //second callback is executed if there was an error
         console.log('error received from TMDB api call');
@@ -50,7 +50,10 @@ angular.module('zeus.services', [])
       return $http({
         method: 'PUT',
         url: 'user/add/',
-        data: payload
+        data: {
+          type,
+          payload
+        }
       });
     };
 

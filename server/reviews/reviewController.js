@@ -23,17 +23,16 @@ module.exports = {
         none: ''
       }]
     });
-    EventController.addEvent({
-      type: 'NEW_REVIEW',
-      //FIXME: this stores the user token but not the username
-      users: [req.user],
-      date: review.date,
-      text: review.title,
-      data: {
-        rating: review.rating,
-        content: review.content
-      }
-    });
+    console.log(req.user.sub, data, data.movieTitle);
+    User.findOne({
+        user_id: req.user.sub
+      })
+      .then(user => EventController.addEvent({
+        type: 'NEW_REVIEW',
+        users: [user],
+        date: review.date,
+        movie: data.movieTitle
+      }));
     review.save(function (err, reviews) {
       if (err) {
         console.log(err);

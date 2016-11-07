@@ -1,6 +1,7 @@
 var User = require('../users/userModel.js');
 var helpers = require('../config/helpers.js');
 var EventController = require('../events/eventsController');
+var Promise = require('bluebird');
 
 module.exports = {
 
@@ -63,7 +64,7 @@ module.exports = {
   //Gets user info based on the username
   getUserByUsername: function (req, res, next) {
     var username = req.params.username;
-    User.find({
+    User.findOne({
         username: username
       })
       .exec(function (err, userInfo) {
@@ -99,13 +100,28 @@ module.exports = {
     var payload = req.body.payload;
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
-    // TODO: add user events to news feed
-    EventController.addEvent({
-      type,
-      users: [id],
-      data: payload,
-      date: new Date()
-    });
+    const users = [];
+    const dbRequests = [
+      User.findOne({
+        user_id: id
+      })
+    ];
+    if (type === 'following') {
+      dbRequests.push(User.findOne({
+        _id: payload
+      }));
+    }
+    Promise.all(dbRequests)
+      .then(users => {
+        console.log('users', users.map(user => user.username));
+        console.log(payload.title);
+        EventController.addEvent({
+          type,
+          users,
+          date: new Date(),
+          movie: payload.title
+        });
+      });
   },
 
   //Removes data from the list based on the type param ('favorites', 'watched', 'currentlyWatching')
@@ -118,7 +134,7 @@ module.exports = {
 
   //Gets all the users information based on the token
   getUserLists: function (req, res, next) {
-    var id = req.user.sub;
+    var id = req.user.sub; // TODO: how to pass in username?
     User.find({
         user_id: id
       })

@@ -91,7 +91,7 @@ module.exports = {
         new: true
       }, function (err, user) {
         if (err) console.log(err);
-        res.json(user.watched);
+        //res.json(user.watched);
         console.log('updated user')
       });
     }

@@ -16,7 +16,7 @@ module.exports = {
     return Event.find({
         // find all events within the last 12 hours
         date: {
-          $gt: Date.now() - 4320000
+          $gt: Date.now() - 8000000
         }
       })
       .exec((err, data) => {

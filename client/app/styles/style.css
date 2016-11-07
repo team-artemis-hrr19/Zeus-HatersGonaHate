@@ -93,7 +93,7 @@ article {
   width: 100%;
   position: fixed;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(96, 52, 177, 0.85);
   white-space: nowrap;
 }
 
@@ -106,8 +106,8 @@ article {
 .navLinks {
   position: fixed;
   float: right;
-  top: 30px;
-  right: 30px;
+  /*top: 30px;
+  right: 30px;*/
 }
 
 a.navLink {
@@ -216,7 +216,7 @@ a.navLink:hover {
   left: 0;
   padding: 1rem;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(96, 52, 177, 0.85);
 }
 
 .footer a {
@@ -469,7 +469,7 @@ button:hover {
 /* landing page */
 
 .landing {
-  background-color: black;
+  background-color: #e7e7e7;
   width: inherit;
   top: 0;
   padding-top: 80px;
@@ -482,7 +482,7 @@ button:hover {
 }
 
 .category h2 {
-  color: white;
+  color: rgba(106,190,216,.81);
   margin-top: 100px;
   margin-left: 15px;
   margin-bottom: 8px;
@@ -746,11 +746,21 @@ button:hover {
 /* About page */
 
 .member {
+  max-width: 200px;
+  max-height: 380px
   position: relative;
   display: inline-block;
   margin-right: 13px;
   margin-left: 13px;
   margin-top: 50px;
+}
+
+.member > p{
+display:flex;
+}
+
+.member > img{
+  border: 1px solid black;
 }
 
 .pic {

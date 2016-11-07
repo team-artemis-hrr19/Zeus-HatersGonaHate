@@ -275,7 +275,7 @@ angular.module('zeus.services', [])
 
   var addToUserLists = function (type, payload) {
     console.log(type, payload)
-    $http({
+    return $http({
       method: 'PUT',
       url: '/user/add',
       data: {
@@ -283,7 +283,14 @@ angular.module('zeus.services', [])
         payload
       }
     });
-  }
+  };
+
+  var getUserFollowers = function () {
+    return $http({
+      method: 'GET',
+      url: '/user/following',
+    });
+  };
 
   var getUserId = function (username) {
     return $http({
@@ -318,6 +325,7 @@ angular.module('zeus.services', [])
   return {
     checkUser,
     getUserId,
+    getUserFollowers,
     editUser,
     getUserReviews,
     deleteUser,

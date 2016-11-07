@@ -1,5 +1,5 @@
 angular.module('zeus.newsfeed', ['pageslide-directive'])
-  .controller('newsFeedController', function ($scope, $http, Event, Details) {
+  .controller('newsFeedController', function ($scope, $http, Event, User) {
     $scope.notification = '';
     $scope.closeUser = function (id) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
@@ -30,10 +30,9 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
       setTimeout($scope.closeNotification, 2000);
     };
 
-    $http({
-      method: 'GET',
-      url: 'following'
-    }).then(following => $scope.following = following);
+    User.getUserFollowers()
+      .then(following => $scope.following = following.data)
+      .then(() => console.log($scope.following));
 
     // streams
     const userStream = Rx.Observable.fromPromise(
@@ -55,6 +54,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     eventStream
       .safeApply($scope, function (events) {
         $scope.events = events.data
+          .filter(event => !!event) // HACKY: some events return undefined
           .reverse()
           .map(event => {
             const emojiText = Event.getEmojiText(event.type);

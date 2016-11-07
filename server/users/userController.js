@@ -118,7 +118,7 @@ module.exports = {
 
   //Gets all the users information based on the token
   getUserLists: function (req, res, next) {
-    var id = req.user.sub;
+    var id = req.user.sub; // TODO: how to pass in username?
     User.find({
         user_id: id
       })

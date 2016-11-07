@@ -96,9 +96,10 @@ module.exports = {
   addToUserLists: function (req, res, next) {
     var id = req.user.sub;
     var type = req.body.type;
-    var payload = req.body.payload;
+    var payload = req.body;
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
+    res.sendStatus(200);
   },
 
   //Removes data from the list based on the type param ('favorites', 'watched', 'currentlyWatching')

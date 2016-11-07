@@ -100,23 +100,27 @@ module.exports = {
     var payload = req.body.payload;
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
-    // TODO: add user events to news feed
     const users = [];
-    Promise.all([
-        User.findOne({
-          user_id: id
-        }),
-        User.findOne({
-          _id: payload
-        })
-      ])
+    const movie = null;
+    const getUsers = [
+      User.findOne({
+        user_id: id
+      })
+    ];
+    if (type === 'following') {
+      getUsers.push(User.findOne({
+        _id: payload
+      }));
+    }
+    Promise.all(getUsers)
       .then(users => {
         console.log('users', users.map(user => user.username));
         EventController.addEvent({
           type,
           users,
           data: payload,
-          date: new Date()
+          date: new Date(),
+          movie
         });
       });
   },

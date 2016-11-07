@@ -364,7 +364,13 @@ angular.module('zeus.services', [])
       deleteComment: deleteComment
     };
   })
-  .factory('EventConverter', function () {
+  .factory('Event', function ($http) {
+
+    const getEvents = () => $http({
+      method: 'GET',
+      url: '/event'
+    });
+
     const getEmojiText = type => {
       const emojis = {
         USER_JOIN: {
@@ -389,7 +395,8 @@ angular.module('zeus.services', [])
     };
 
     return {
-      getEmojiText
+      getEmojiText,
+      getEvents
     };
   })
   .service('authService', authService);

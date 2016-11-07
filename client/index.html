@@ -14,6 +14,7 @@
 
 <body>
 	<div class="" ng-controller="zeusController as ZeusVm">
+		Events {{ZeusVm.events}}
 		<!-- Title -->
 		<div class="nav">
 			<div class="logoSearch">
@@ -26,14 +27,14 @@
 			</div>
 			<div class="navLinks">
 				<a class="navLink" href="" ng-click="ZeusVm.login()" ng-if="!isAuthenticated">Log In</a>
-				<a class="navLink" href="" ng-click="ZeusVm.toggle()"><span class="badge">3</span> News Feed</a>
+				<a class="navLink" href="" ng-click="ZeusVm.toggle()"><span ng-if="ZeusVm.events" class="badge">{{ZeusVm.events}}</span> News Feed</a>
 				<a class="navLink " href="#/user " ng-if="isAuthenticated">My Profile</a>
 				<a class="navLink " href=" " ng-click="ZeusVm.logout() " ng-if="isAuthenticated">Log Out</a>
 			</div>
 		</div>
 		<!--Newsfeed element in pageslide-->
-		<pageslide ps-open="ZeusVm.checked" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true" ps-size="500px ">
-			<a ng-click="ZeusVm.toggle()">Close</a>
+		<pageslide ps-open="ZeusVm.checked" ps-click-outside="true" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true"
+				ps-size="500px ">
 			<div id="news" class="ng-pageslide" ng-controller="newsFeedController">
 				<p ng-if="notification" class="notification">{{notification}}
 					<a ng-click="closeNotification()">X</a>

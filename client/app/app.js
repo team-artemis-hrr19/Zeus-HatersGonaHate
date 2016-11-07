@@ -13,7 +13,7 @@ angular.module('zeus', [
     'ui.router',
     'pageslide-directive'
   ])
-  .controller('zeusController', function ($location, authService, $http, $anchorScroll, User) {
+  .controller('zeusController', function ($location, authService, $http, $anchorScroll, User, Event) {
     var ZeusVm = this;
     ZeusVm.checked = false;
     ZeusVm.toggle = () => {
@@ -27,6 +27,9 @@ angular.module('zeus', [
       $location.path('/results/' + search + '/1');
       ZeusVm.searchQuery = '';
     };
+
+    ZeusVm.events = Event.getEvents()
+      .then(events => ZeusVm.events = events.data.length);
 
     //Checks DB for user when logging in or create then when logging/sign up/in
     ZeusVm.login = function (callback) {

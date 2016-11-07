@@ -1,6 +1,7 @@
 var User = require('../users/userModel.js');
 var helpers = require('../config/helpers.js');
 var EventController = require('../events/eventsController');
+var Promise = require('bluebird');
 
 module.exports = {
 
@@ -63,7 +64,7 @@ module.exports = {
   //Gets user info based on the username
   getUserByUsername: function (req, res, next) {
     var username = req.params.username;
-    User.find({
+    User.findOne({
         username: username
       })
       .exec(function (err, userInfo) {
@@ -100,12 +101,24 @@ module.exports = {
     console.log(type, payload, id);
     helpers.addToListByType(id, payload, type, res);
     // TODO: add user events to news feed
-    EventController.addEvent({
-      type,
-      users: [id],
-      data: payload,
-      date: new Date()
-    });
+    const users = [];
+    Promise.all([
+        User.findOne({
+          user_id: id
+        }),
+        User.findOne({
+          _id: payload
+        })
+      ])
+      .then(users => {
+        console.log('users', users.map(user => user.username));
+        EventController.addEvent({
+          type,
+          users,
+          data: payload,
+          date: new Date()
+        });
+      });
   },
 
   //Removes data from the list based on the type param ('favorites', 'watched', 'currentlyWatching')

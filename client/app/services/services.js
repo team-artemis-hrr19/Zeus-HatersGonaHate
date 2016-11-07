@@ -395,7 +395,6 @@ angular.module('zeus.services', [])
         following: {
           emoji: '✌️',
           midText: 'just followed',
-          postText: 'BFFs forever'
         },
         favorites: {
           emoji: '😊',

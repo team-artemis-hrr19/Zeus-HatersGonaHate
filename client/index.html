@@ -53,12 +53,19 @@
 				<div class="newsfeed">
 					<h4 class="heading-medium news-heading">News Feed</h4>
 					<div class="event" ng-repeat="event in events">
-						<span>{{event.emoji}}</span>
-						<span class="user-badge" ng-repeat="user in event.users">
-							{{event.preText}}<img src="{{user.profilePicLink}}"></img>
-							{{user.username}}
-							{{event.postText}}
+						<span>{{event.emoji}}</span> {{event.preText}}
+						<span class="user-badge">
+							<img src="{{event.users[0].profilePicLink}}"></img>
+								{{event.users[0].username}}
 						</span>
+						<span ng-if="event.users[1]">
+							{{event.midText}}
+							<span class="user-badge">
+								<img src="{{event.users[1].profilePicLink}}"></img>
+									{{event.users[1].username}}
+							</span>
+						</span>
+						{{event.postText}}
 						<button ng-click="closeEvent(event._id)">X</button>
 					</div>
 				</div>

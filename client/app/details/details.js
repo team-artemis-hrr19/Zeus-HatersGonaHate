@@ -48,6 +48,7 @@
           DetailsVm.scores.IMDb = data.imdbRating
           DetailsVm.scores.Metacritic = data.Metascore 
           DetailsVm.actors = data.Actors.split(',');
+          DetailsVm.rating = data.Rated;
         });
         //if the selection is a tv show
       } else if (DetailsVm.original_name !== undefined) {
@@ -110,19 +111,24 @@
   DetailsVm.getShowtimes = function(movieTitle) {
     Details.getShowtimes(DetailsVm.fullDate, DetailsVm.zip).then(function(allShowtimes) {
       var nowPlaying = [];
+      var time = new Date().toString().slice(16, 21);
       if (allShowtimes) {
         allShowtimes.forEach(function(showtime) {
           if (movieTitle === showtime.title) {
             showtime.showtimes.forEach((showing) => {
               var length = nowPlaying.length;
               if (length === 0) {
-                nowPlaying.push(
-                  {
-                    theatreName: showing.theatre.name,
-                    showings: [Details.normalizeTime(showing.dateTime.slice(11))],
-                    ticketURI: showing.ticketURI
-                  }
-                );
+                if (showing.dateTime.slice(11).split(':')[0] === '00'){
+                  
+                } else {
+                  nowPlaying.push(
+                    {
+                      theatreName: showing.theatre.name,
+                      showings: [Details.normalizeTime(showing.dateTime.slice(11))],
+                      ticketURI: showing.ticketURI
+                    }
+                  );
+                }
               } else {
                 for (var i = 0; i < length; i++) {
                   if (nowPlaying[i] && nowPlaying[i].theatreName === showing.theatre.name) {

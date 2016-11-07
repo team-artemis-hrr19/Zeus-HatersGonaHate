@@ -3,7 +3,7 @@
      // capture the value of `this` in a variable vm
      // vm stands for view model and is a replacement for $scope
      var DetailsVm = this;
-     DetailsVm.scores = {} //obj to store ratings
+     DetailsVm.scores = {}; //obj to store ratings
      DetailsVm.currentView = 'reviews';
      DetailsVm.loaded = false;
      DetailsVm.data = {};
@@ -26,41 +26,41 @@
 
      Details.getDetails(DetailsVm.type, DetailsVm.id).then(function (data) {
          //redirect to 404 page if API call response is an error
-         if (data === 'error') {
-           $location.path(404);
-         }
-         DetailsVm.data = data; // save all movie details for the requested movie
-         DetailsVm.concatUrl();
+       if (data === 'error') {
+         $location.path(404);
+       }
+       DetailsVm.data = data; // save all movie details for the requested movie
+       DetailsVm.concatUrl();
 
          //convenience properties for shorthand in html views
-         DetailsVm.original_title = DetailsVm.data.original_title;
-         DetailsVm.original_name = DetailsVm.data.original_name;
-         DetailsVm.poster_path = DetailsVm.data.poster_path;
-         DetailsVm.overview = DetailsVm.data.overview;
-         DetailsVm.scores.TMDb = (DetailsVm.data.vote_average) // gets ratings for tv/movies
-         DetailsVm.loaded = true;
+       DetailsVm.original_title = DetailsVm.data.original_title;
+       DetailsVm.original_name = DetailsVm.data.original_name;
+       DetailsVm.poster_path = DetailsVm.data.poster_path;
+       DetailsVm.overview = DetailsVm.data.overview;
+       DetailsVm.scores.TMDb = (DetailsVm.data.vote_average); // gets ratings for tv/movies
+       DetailsVm.loaded = true;
          //loads actor info on details page load
-         DetailsVm.getActors = function () {
+       DetailsVm.getActors = function () {
            //if the selection is a movie
-           if (DetailsVm.original_title !== undefined) {
-             Details.getActors(DetailsVm.original_title).then(function (data) {
+         if (DetailsVm.original_title !== undefined) {
+           Details.getActors(DetailsVm.original_title).then(function (data) {
                //gets ratings for moviess
-               DetailsVm.scores.IMDb = data.imdbRating
-               DetailsVm.scores.Metacritic = data.Metascore
-               DetailsVm.actors = data.Actors.split(',');
-             });
+             DetailsVm.scores.IMDb = data.imdbRating;
+             DetailsVm.scores.Metacritic = data.Metascore;
+             DetailsVm.actors = data.Actors.split(',');
+           });
              //if the selection is a tv show
-           } else if (DetailsVm.original_name !== undefined) {
-             Details.getActors(DetailsVm.original_name).then(function (data) {
+         } else if (DetailsVm.original_name !== undefined) {
+           Details.getActors(DetailsVm.original_name).then(function (data) {
                //gets ratings for tv
-               DetailsVm.scores.IMDb = data.imdbRating
-               DetailsVm.scores.Metacritic = data.Metascore
-               DetailsVm.actors = data.Actors.split(',');
-             });
-           }
-         };
-         DetailsVm.getActors();
-       })
+             DetailsVm.scores.IMDb = data.imdbRating;
+             DetailsVm.scores.Metacritic = data.Metascore;
+             DetailsVm.actors = data.Actors.split(',');
+           });
+         }
+       };
+       DetailsVm.getActors();
+     })
        .catch(function () {
          DetailsVm.loaded = true;
        });
@@ -106,56 +106,56 @@
 
      DetailsVm.zip = '';
 
-  //function is called when the user submits a zip code to get local showtimes
-  DetailsVm.getShowtimes = function(movieTitle) {
-    Details.getShowtimes(DetailsVm.fullDate, DetailsVm.zip).then(function(allShowtimes) {
-      var nowPlaying = [];
-      var time = new Date().toString().slice(16, 21);
-      if (allShowtimes) {
-        allShowtimes.forEach(function(showtime) {
-          if (movieTitle === showtime.title) {
-            showtime.showtimes.forEach((showing) => {
-              var length = nowPlaying.length;
-              if (length === 0) {
-                if (showing.dateTime.slice(11).split(':')[0] === '00'){
+     //function is called when the user submits a zip code to get local showtimes
+     DetailsVm.getShowtimes = function(movieTitle) {
+       Details.getShowtimes(DetailsVm.fullDate, DetailsVm.zip).then(function(allShowtimes) {
+         var nowPlaying = [];
+         var time = new Date().toString().slice(16, 21);
+         if (allShowtimes) {
+           allShowtimes.forEach(function(showtime) {
+             if (movieTitle === showtime.title) {
+               showtime.showtimes.forEach((showing) => {
+                 var length = nowPlaying.length;
+                 if (length === 0) {
+                   if (showing.dateTime.slice(11).split(':')[0] === '00') {
                   
-                } else {
-                  nowPlaying.push(
-                    {
-                      theatreName: showing.theatre.name,
-                      showings: [Details.normalizeTime(showing.dateTime.slice(11))],
-                      ticketURI: showing.ticketURI
-                    }
+                   } else {
+                     nowPlaying.push(
+                       {
+                         theatreName: showing.theatre.name,
+                         showings: [Details.normalizeTime(showing.dateTime.slice(11))],
+                         ticketURI: showing.ticketURI
+                       }
                   );
-                }
-              } else {
-                for (var i = 0; i < length; i++) {
-                  if (nowPlaying[i] && nowPlaying[i].theatreName === showing.theatre.name) {
-                    nowPlaying[i].showings.push(Details.normalizeTime(showing.dateTime.slice(11)));
-                  } else if (i === length - 1) {
-                    nowPlaying.push(
-                      {
-                        theatreName: showing.theatre.name,
-                        showings: [Details.normalizeTime(showing.dateTime.slice(11))],
-                        ticketURI: showing.ticketURI
-                      }
+                   }
+                 } else {
+                   for (var i = 0; i < length; i++) {
+                     if (nowPlaying[i] && nowPlaying[i].theatreName === showing.theatre.name) {
+                       nowPlaying[i].showings.push(Details.normalizeTime(showing.dateTime.slice(11)));
+                     } else if (i === length - 1) {
+                       nowPlaying.push(
+                         {
+                           theatreName: showing.theatre.name,
+                           showings: [Details.normalizeTime(showing.dateTime.slice(11))],
+                           ticketURI: showing.ticketURI
+                         }
                     );
-                  }
-                }
-              }
-            });
-          }
-        });
-        if (!nowPlaying) {
-          DetailsVm.hasNoShowtime = true;
-        }
-      } else {
-        DetailsVm.hasNoShowtime = true;
-      }
-      DetailsVm.showtimes = nowPlaying;
-    });
-    DetailsVm.zip = '';
-  };
+                     }
+                   }
+                 }
+               });
+             }
+           });
+           if (!nowPlaying) {
+             DetailsVm.hasNoShowtime = true;
+           }
+         } else {
+           DetailsVm.hasNoShowtime = true;
+         }
+         DetailsVm.showtimes = nowPlaying;
+       });
+       DetailsVm.zip = '';
+     };
 
 
      DetailsVm.concatUrl = function () {

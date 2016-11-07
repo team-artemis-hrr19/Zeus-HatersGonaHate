@@ -1,5 +1,5 @@
 angular.module('zeus.newsfeed', ['pageslide-directive'])
-  .controller('newsFeedController', function ($scope, $http, Event, Details) {
+  .controller('newsFeedController', function ($scope, $http, Event, User) {
     $scope.notification = '';
     $scope.closeUser = function (id) {
       const random = $scope.users[Math.floor(Math.random() * $scope.users.length)];
@@ -13,7 +13,6 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     };
 
     $scope.closeEvent = function (id) {
-      console.log('close event called', id);
       const index = $scope.events
         .map(event => event && event._id)
         .indexOf(id);
@@ -24,16 +23,15 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     };
 
     $scope.followUser = function (id, username) {
-      Details.addToUserLists('following', id);
+      User.addToUserLists('following', id);
       $scope.notification = `You are now following ${username}!`
       $scope.closeUser(id);
       setTimeout($scope.closeNotification, 2000);
     };
 
-    $http({
-      method: 'GET',
-      url: 'following'
-    }).then(following => $scope.following = following);
+    User.getUserFollowers()
+      .then(following => $scope.following = following.data)
+      .then(() => console.log($scope.following));
 
     // streams
     const userStream = Rx.Observable.fromPromise(
@@ -50,11 +48,20 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
       })
       .subscribe();
 
-    const eventStream = Rx.Observable.fromPromise(Event.getEvents());
+    //FIXME: initial load- how to refactor this out
+    const eventStream = Rx.Observable.fromPromise(Event.getEvents);
 
-    eventStream
-      .safeApply($scope, function (events) {
-        $scope.events = events.data
+    const event2Stream = Rx.Observable.create(function subscribe(observer) {
+      return setInterval(() => {
+        Event.getEvents()
+          .then(events => observer.next(events));
+      }, 500);
+    });
+
+    event2Stream
+      .safeApply($scope, function (res) {
+        $scope.events = res.data
+          .filter(event => !!event)
           .reverse()
           .map(event => {
             const emojiText = Event.getEmojiText(event.type);
@@ -66,7 +73,25 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
                 postText: emojiText.postText
               });
           });
-        console.log($scope.events);
+      })
+      .subscribe()
+
+    // FIXME: This is vestigial because I have stream above but not sure how to get initial load
+    eventStream
+      .safeApply($scope, function (events) {
+        $scope.events = events.data
+          .filter(event => !!event) // HACKY: some events return undefined
+          .reverse()
+          .map(event => {
+            const emojiText = Event.getEmojiText(event.type);
+            if (emojiText)
+              return Object.assign(event, {
+                emoji: emojiText.emoji,
+                preText: emojiText.preText,
+                midText: emojiText.midText,
+                postText: emojiText.postText
+              });
+          });
       })
       .subscribe();
   });

@@ -275,7 +275,7 @@ angular.module('zeus.services', [])
 
   var addToUserLists = function (type, payload) {
     console.log(type, payload)
-    $http({
+    return $http({
       method: 'PUT',
       url: '/user/add',
       data: {
@@ -283,7 +283,14 @@ angular.module('zeus.services', [])
         payload
       }
     });
-  }
+  };
+
+  var getUserFollowers = function () {
+    return $http({
+      method: 'GET',
+      url: '/user/following',
+    });
+  };
 
   var getUserId = function (username) {
     return $http({
@@ -318,6 +325,7 @@ angular.module('zeus.services', [])
   return {
     checkUser,
     getUserId,
+    getUserFollowers,
     editUser,
     getUserReviews,
     deleteUser,
@@ -381,12 +389,23 @@ angular.module('zeus.services', [])
         },
         NEW_REVIEW: {
           emoji: '🌟',
-          preText: 'New review:',
-          postText: 'just rated'
+          midText: 'just reviewed',
+          postText: '!'
         },
-        FOLLOW: {
+        following: {
           emoji: '✌️',
-          midText: 'just followed'
+          midText: 'just followed',
+          postText: '!'
+        },
+        favorites: {
+          emoji: '😊',
+          midText: 'favorited',
+          postText: '!'
+        },
+        watched: {
+          emoji: '👀',
+          midText: 'just watched',
+          postText: '!'
         },
         THUMBS_UP: '👍',
         THUMBS_DOWN: '👎'

@@ -102,25 +102,25 @@ module.exports = {
     helpers.addToListByType(id, payload, type, res);
     const users = [];
     const movie = null;
-    const getUsers = [
+    const dbRequests = [
       User.findOne({
         user_id: id
       })
     ];
     if (type === 'following') {
-      getUsers.push(User.findOne({
+      dbRequests.push(User.findOne({
         _id: payload
       }));
     }
-    Promise.all(getUsers)
+    Promise.all(dbRequests)
       .then(users => {
         console.log('users', users.map(user => user.username));
+        console.log(payload.title);
         EventController.addEvent({
           type,
           users,
-          data: payload,
           date: new Date(),
-          movie
+          movie: payload.title
         });
       });
   },

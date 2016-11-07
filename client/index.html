@@ -65,7 +65,9 @@
 									{{event.users[1].username}}
 							</span>
 						</span>
-						{{event.postText}}
+						<span ng-if="event.movie">
+							{{event.midText}}<span> </span> {{event.movie}}
+						</span>{{event.postText}}
 						<button ng-click="closeEvent(event._id)">X</button>
 					</div>
 				</div>

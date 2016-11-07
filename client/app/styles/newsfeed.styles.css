@@ -1,7 +1,6 @@
 pageslide {
   background: rgba(0, 0, 0, 0.95);
   overflow: scroll;
-  padding-left: 20px;
   color: ghostwhite;
 }
 

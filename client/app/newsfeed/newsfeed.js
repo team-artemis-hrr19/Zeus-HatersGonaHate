@@ -24,7 +24,7 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     };
 
     $scope.followUser = function (id, username) {
-      Details.addToUserLists('following', id);
+      User.addToUserLists('following', id);
       $scope.notification = `You are now following ${username}!`
       $scope.closeUser(id);
       setTimeout($scope.closeNotification, 2000);
@@ -54,6 +54,10 @@ angular.module('zeus.newsfeed', ['pageslide-directive'])
     eventStream
       .safeApply($scope, function (events) {
         $scope.events = events.data
+          .map(event => {
+            console.log(event);
+            return event;
+          })
           .filter(event => !!event) // HACKY: some events return undefined
           .reverse()
           .map(event => {

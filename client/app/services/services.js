@@ -396,6 +396,14 @@ angular.module('zeus.services', [])
           emoji: '✌️',
           midText: 'just followed'
         },
+        favorites: {
+          emoji: '😊',
+          postText: 'favorited a movie'
+        },
+        watched: {
+          emoji: '👀',
+          postText: 'watched a movie'
+        },
         THUMBS_UP: '👍',
         THUMBS_DOWN: '👎'
       };

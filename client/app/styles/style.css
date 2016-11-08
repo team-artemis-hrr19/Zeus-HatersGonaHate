@@ -286,6 +286,7 @@ select {
 
 button {
   background-color: #F9DC5C;
+  box-shadow: 1px 3px 3px #2E2E2E;
   border: black solid 0;
   border-radius: 7px;
   font-size: 13px;
@@ -482,7 +483,7 @@ button:hover {
 }
 
 .category h2 {
-  color: rgba(106,190,216,.81);
+  color: rgba(106, 190, 216, .81);
   margin-top: 100px;
   margin-left: 15px;
   margin-bottom: 8px;
@@ -747,19 +748,18 @@ button:hover {
 
 .member {
   max-width: 200px;
-  max-height: 380px
-  position: relative;
+  max-height: 380px position: relative;
   display: inline-block;
   margin-right: 13px;
   margin-left: 13px;
   margin-top: 50px;
 }
 
-.member > p{
-display:flex;
+.member>p {
+  display: flex;
 }
 
-.member > img{
+.member>img {
   border: 1px solid black;
 }
 
@@ -767,7 +767,6 @@ display:flex;
   width: 170px;
   /*border-radius: 170px;*/
 }
-
 
 .score {
   padding-right: 10px;
@@ -785,15 +784,17 @@ display:flex;
   width: 60px;
   height: 60px;
 }
-.companyLogo{
+
+.companyLogo {
   max-height: 40px;
   max-width: 50px;
 }
+
 .ratingArea {
   /*margin-top: 10px;*/
 }
 
-.landingRatingsContainer{
+.landingRatingsContainer {
   background-color: black;
   opacity: .7;
   width: 100%;
@@ -803,11 +804,11 @@ display:flex;
   left: 0;
   z-index: 1000;
 }
+
 .content-show-hide {
   transition: all linear .5s;
 }
+
 .content-show-hide.ng-hide {
   opacity: 0;
 }
-
-

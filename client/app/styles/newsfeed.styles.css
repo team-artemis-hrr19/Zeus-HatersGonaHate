@@ -17,7 +17,9 @@ pageslide img {
   width: 90%;
 }
 
-.trending {}
+.close {
+  margin-left: 20px;
+}
 
 .recUser {
   margin-top: 10px;

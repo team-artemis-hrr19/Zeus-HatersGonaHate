@@ -35,7 +35,7 @@
 		<pageslide ps-open="ZeusVm.checked" ps-click-outside="false" ps-speed=".4" ps-target="#news" ps-key-listener="true" ps-size="500px ">
 			<div id="news" class="ng-pageslide" ng-controller="newsFeedController">
 				<p></p>
-				<button ng-click="ZeusVm.toggle()">Close</button>
+				<button class="close" ng-click="ZeusVm.toggle()">Close</button>
 				<p ng-if="notification" class="notification">{{notification}}
 					<a ng-click="closeNotification()">X</a>
 				</p>

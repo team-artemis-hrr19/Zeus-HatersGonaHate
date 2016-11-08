@@ -119,7 +119,8 @@ module.exports = {
           type,
           users,
           date: new Date(),
-          movie: payload.title
+          movie: payload.title,
+          movieId: payload.id
         });
       });
   },

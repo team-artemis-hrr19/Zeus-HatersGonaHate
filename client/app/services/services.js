@@ -52,7 +52,8 @@ angular.module('zeus.services', [])
         url: 'user/add/',
         data: {
           type,
-          payload
+          payload,
+          movieId: payload.id
         }
       });
     };

@@ -4,8 +4,8 @@ const EventSchema = new mongoose.Schema({
   type: String,
   users: Array,
   movie: String,
+  movieId: String,
   date: Date,
-  media: Array,
   text: String,
   data: Object
 });

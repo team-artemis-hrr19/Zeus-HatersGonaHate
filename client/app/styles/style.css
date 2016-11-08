@@ -747,7 +747,7 @@ button:hover {
 
 .member {
   max-width: 190px;
-  max-height: 380px
+  max-height: 380px;
   position: relative;
   display: inline-block;
   margin-right: 13px;

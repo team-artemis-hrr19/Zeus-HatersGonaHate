@@ -23,7 +23,7 @@ module.exports = {
         none: ''
       }]
     });
-    console.log(req.user.sub, data, data.movieTitle);
+    console.log(req.user.sub, data, data.movieTitle, typeId);
     User.findOne({
         user_id: req.user.sub
       })
@@ -31,7 +31,8 @@ module.exports = {
         type: 'NEW_REVIEW',
         users: [user],
         date: review.date,
-        movie: data.movieTitle
+        movie: data.movieTitle,
+        movieId: typeId
       }));
     review.save(function (err, reviews) {
       if (err) {
